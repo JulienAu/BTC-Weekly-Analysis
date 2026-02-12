@@ -1,5 +1,17 @@
 {
-  "updatedAt": "2026-02-12T00:00:00.000Z",
-  "latestHeadline": "",
-  "versions": []
+  "updatedAt": "2026-02-12T17:09:39.252Z",
+  "latestHeadline": "Bitcoin : Consolidation sous 70k$, catalyseurs macro et flux ETF en observation",
+  "versions": [
+    {
+      "version": 1,
+      "tag": "Manual run",
+      "model": "gpt-4.1",
+      "createdAt": "2026-02-12T17:09:39.252Z",
+      "headline": "Bitcoin : Consolidation sous 70k$, catalyseurs macro et flux ETF en observation",
+      "analysis": "Macro : Les marchés globaux restent attentistes avant les prochaines décisions de la Fed (FOMC le 12 juin). Les chiffres de l’emploi US publiés vendredi sont ressortis au-dessus des attentes, renforçant le scénario de taux élevés plus longtemps. Cela pèse sur le sentiment risk-on, mais l’appétit pour les actifs alternatifs reste soutenu par l’incertitude géopolitique et la faiblesse relative du dollar. On-chain : Les métriques montrent une phase de consolidation : baisse des volumes de transactions, stagnation des flux entrants sur les exchanges, mais maintien d’un taux de HODL élevé. Les réserves des mineurs restent stables, signalant l’absence de pression vendeuse majeure post-halving. Institutionnels/ETF : Les ETF spot Bitcoin US enregistrent des flux entrants nets modérés, mais la dynamique ralentit par rapport au pic de mars-avril. Les positions ouvertes sur les futures CME restent élevées, reflétant l’intérêt institutionnel, mais sans emballement. Régulation : Aucun développement majeur cette semaine, mais la campagne présidentielle US met la régulation crypto au centre du débat, avec des signaux positifs sur une éventuelle clarification réglementaire à moyen terme. Scénarios 3-6 mois : (1) Consolidation prolongée entre 60k$ et 73k$ si la Fed maintient sa posture restrictive et que les flux ETF restent modérés ; (2) Reprise haussière vers de nouveaux ATH si les flux ETF repartent à la hausse et que la Fed amorce un pivot dovish ; (3) Correction vers 55-60k$ en cas de choc macro (reprise inflationniste ou crise de liquidité).",
+      "differences": [
+        "Première édition : pas de différences avec la version précédente."
+      ]
+    }
+  ]
 }
