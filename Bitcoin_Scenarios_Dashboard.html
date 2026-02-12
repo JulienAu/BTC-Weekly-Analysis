@@ -385,6 +385,110 @@
   .consensus-range .high { color: var(--accent-green); }
   .consensus-range .sep { color: var(--text-muted); margin: 0 6px; }
   .consensus-sub { color: var(--text-secondary); font-size: 0.88rem; margin-top: 8px; }
+
+  /* ── AI analysis lab ── */
+  .analysis-lab {
+    background: linear-gradient(135deg, rgba(59,130,246,0.10), rgba(249,115,22,0.08));
+    border: 1px solid rgba(59,130,246,0.35);
+  }
+  .analysis-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+    margin-bottom: 14px;
+  }
+  .analysis-controls input, .analysis-controls textarea, .analysis-controls select {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.86rem;
+  }
+  .analysis-controls textarea {
+    min-height: 80px;
+    resize: vertical;
+    grid-column: 1 / -1;
+  }
+  .workflow-help {
+    grid-column: 1 / -1;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    background: rgba(59,130,246,0.08);
+    border: 1px solid rgba(59,130,246,0.25);
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+  .workflow-help code { color: var(--accent-blue); }
+  .analysis-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+  }
+  .btn-primary { background: var(--accent-orange); color: #111827; }
+  .btn-secondary { background: rgba(100,116,139,0.2); color: var(--text-primary); border: 1px solid var(--border); }
+  .btn-disabled { opacity: 0.45; cursor: not-allowed; }
+  .ai-status { color: var(--text-secondary); font-size: 0.82rem; }
+  .version-box { margin-top: 14px; }
+  .version-toolbar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .version-toolbar select {
+    min-width: 240px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: 0.84rem;
+  }
+  .version-meta { color: var(--text-muted); font-size: 0.8rem; margin-bottom: 8px; }
+  .version-headline {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .analysis-output {
+    white-space: pre-wrap;
+    color: var(--text-secondary);
+    font-size: 0.87rem;
+    background: rgba(0,0,0,0.16);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 12px;
+    line-height: 1.55;
+  }
+  .diff-list { list-style: none; margin: 0; padding: 0; }
+  .diff-list li {
+    padding: 9px 12px;
+    background: rgba(16,185,129,0.08);
+    border-left: 3px solid var(--accent-green);
+    border-radius: 8px;
+    margin-bottom: 7px;
+    font-size: 0.84rem;
+    color: var(--text-secondary);
+  }
+
 </style>
 </head>
 <body>
@@ -447,6 +551,40 @@
 
 <!-- ═══════════ TAB 1 — OVERVIEW ═══════════ -->
 <div class="tab-content active" id="tab-overview">
+
+
+  <div class="card analysis-lab">
+    <h2><span class="dot" style="background:var(--accent-blue)"></span>Analyse IA continue (versionnée)</h2>
+    <p style="color:var(--text-secondary); font-size:0.88rem;">Déclenche une nouvelle analyse BTC via GitHub Actions (secret OpenAI côté serveur), puis charge l'historique versionné publié dans ce dashboard pour comparer automatiquement les évolutions majeures avec la version précédente.</p>
+
+    <div class="analysis-controls">
+      <input type="text" id="analysisTag" placeholder="Tag attendu (ex: Semaine 07-2026)">
+      <input type="password" id="launchPassword" placeholder="Mot de passe fondateur pour lancer une nouvelle analyse">
+      <textarea id="analysisContext" placeholder="Contexte à transmettre dans GitHub Action (flows ETF, macro, régulation, on-chain, sentiment...)."></textarea>
+      <div class="workflow-help">La clé OpenAI reste côté GitHub Actions via le secret <code>OPENAI_API_KEY</code>. Aucune clé n'est stockée dans le navigateur. Lancement protégé par mot de passe fondateur. 1) Déverrouille, 2) lance le workflow, 3) attends le commit auto, 4) recharge ici.</div>
+    </div>
+
+    <div class="analysis-actions">
+      <button class="btn btn-primary" id="runAnalysisBtn">🔄 Charger la dernière analyse versionnée</button>
+      <a class="btn btn-secondary" id="requestUpdateBtn" href="#" target="_blank" rel="noopener noreferrer">🚀 Lancer une nouvelle analyse (GitHub Action · protégé)</a>
+      <button class="btn btn-secondary" id="exportVersionsBtn">⬇️ Exporter l'historique JSON</button>
+      <span class="ai-status" id="aiStatus">Aucune analyse versionnée chargée pour le moment.</span>
+    </div>
+
+    <div class="version-box">
+      <div class="version-toolbar">
+        <label for="versionSelect" style="font-size:0.8rem; color:var(--text-muted);">Version à afficher :</label>
+        <select id="versionSelect">
+          <option value="latest">Dernière version</option>
+        </select>
+      </div>
+      <div class="version-meta" id="versionMeta">Version affichée : analyse initiale statique</div>
+      <div class="version-headline" id="versionHeadline">Titre : n/a</div>
+      <div class="analysis-output" id="analysisOutput">L'analyse IA apparaîtra ici après publication GitHub Action.</div>
+      <h3 style="font-size:0.9rem; margin-bottom:8px; color:var(--text-primary);">Grandes différences vs version précédente</h3>
+      <ul class="diff-list" id="diffList"><li>Aucune comparaison disponible pour l'instant.</li></ul>
+    </div>
+  </div>
 
   <div class="legend-row">
     <div class="legend-item"><div class="legend-dot" style="background:var(--accent-red)"></div> Pessimiste (15–20 %)</div>
@@ -778,6 +916,191 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 
 // ── Utility ──
 function fmt(n) { return n >= 1000 ? (n/1000).toFixed(0) + 'k$' : n + '$'; }
+
+// ── AI analysis workflow (GitHub-hosted versioning, no client API key) ──
+const HISTORY_URL = 'data/analysis-history.json';
+
+const analysisTagInput = document.getElementById('analysisTag');
+const analysisContextInput = document.getElementById('analysisContext');
+const runAnalysisBtn = document.getElementById('runAnalysisBtn');
+const requestUpdateBtn = document.getElementById('requestUpdateBtn');
+const launchPasswordInput = document.getElementById('launchPassword');
+const exportVersionsBtn = document.getElementById('exportVersionsBtn');
+const aiStatus = document.getElementById('aiStatus');
+const versionSelect = document.getElementById('versionSelect');
+const versionMeta = document.getElementById('versionMeta');
+const versionHeadline = document.getElementById('versionHeadline');
+const analysisOutput = document.getElementById('analysisOutput');
+const diffList = document.getElementById('diffList');
+
+let cachedVersions = [];
+const REQUIRED_LAUNCH_PASSWORD = 'founders123';
+let launchUnlocked = sessionStorage.getItem('btcLaunchUnlocked') === '1';
+
+function renderVersion(version, prevVersion) {
+  if (!version) {
+    versionMeta.textContent = "Version affichée : analyse initiale statique";
+    versionHeadline.textContent = "Titre : n/a";
+    analysisOutput.textContent = "L'analyse IA apparaîtra ici après publication par GitHub Action.";
+    diffList.innerHTML = '<li>Aucune comparaison disponible pour l'instant.</li>';
+    return;
+  }
+
+  versionMeta.textContent = `Version ${version.version} · ${version.tag || 'sans tag'} · ${new Date(version.createdAt).toLocaleString('fr-FR')}`;
+  versionHeadline.textContent = `Titre : ${version.headline || 'Mise à jour BTC'}`;
+  analysisOutput.textContent = version.analysis;
+
+  const diffs = version.differences?.length
+    ? version.differences
+    : (prevVersion ? ['Différences non structurées dans cette version.'] : ['Première version IA enregistrée.']);
+  diffList.innerHTML = diffs.map(item => `<li>${item}</li>`).join('');
+}
+
+function hydrateVersionSelect(versions) {
+  versionSelect.innerHTML = '';
+  if (!versions.length) {
+    const empty = document.createElement('option');
+    empty.value = '';
+    empty.textContent = 'Aucune version disponible';
+    versionSelect.appendChild(empty);
+    versionSelect.disabled = true;
+    return;
+  }
+
+  versionSelect.disabled = false;
+  const latest = document.createElement('option');
+  latest.value = 'latest';
+  latest.textContent = `Dernière version (#${versions[versions.length - 1].version})`;
+  versionSelect.appendChild(latest);
+
+  versions.slice().reverse().forEach((version) => {
+    const option = document.createElement('option');
+    option.value = String(version.version);
+    option.textContent = `#${version.version} · ${version.tag || 'sans tag'} · ${new Date(version.createdAt).toLocaleDateString('fr-FR')}`;
+    versionSelect.appendChild(option);
+  });
+}
+
+function renderSelectedVersion() {
+  if (!cachedVersions.length) {
+    renderVersion(null, null);
+    return;
+  }
+
+  const selected = versionSelect.value;
+  const target = selected === 'latest'
+    ? cachedVersions[cachedVersions.length - 1]
+    : cachedVersions.find((v) => String(v.version) === selected);
+
+  if (!target) {
+    renderVersion(cachedVersions[cachedVersions.length - 1], cachedVersions[cachedVersions.length - 2]);
+    return;
+  }
+
+  const prev = cachedVersions.find((v) => v.version === target.version - 1);
+  renderVersion(target, prev);
+}
+
+async function loadPublishedVersions() {
+  aiStatus.textContent = 'Chargement des analyses versionnées...';
+  try {
+    const response = await fetch(`${HISTORY_URL}?t=${Date.now()}`);
+    if (!response.ok) throw new Error(`Fichier introuvable (${response.status})`);
+
+    const payload = await response.json();
+    cachedVersions = Array.isArray(payload.versions) ? payload.versions : [];
+
+    hydrateVersionSelect(cachedVersions);
+    versionSelect.value = 'latest';
+    renderSelectedVersion();
+
+    aiStatus.textContent = cachedVersions.length
+      ? `${cachedVersions.length} version(s) chargée(s) depuis GitHub. Dernière mise à jour: ${new Date(payload.updatedAt || cachedVersions[cachedVersions.length - 1].createdAt).toLocaleString('fr-FR')}`
+      : 'Historique vide: lance la GitHub Action pour générer la première analyse.';
+  } catch (error) {
+    aiStatus.textContent = `⚠️ Impossible de charger l'historique: ${error.message}`;
+  }
+}
+
+function exportVersions() {
+  const blob = new Blob([JSON.stringify(cachedVersions, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `btc-analysis-versions-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+function inferRepoActionsUrl() {
+  const host = window.location.hostname;
+  if (host.endsWith('github.io')) {
+    const repo = window.location.pathname.split('/').filter(Boolean)[0];
+    const owner = host.replace('.github.io', '');
+    if (repo && owner) return `https://github.com/${owner}/${repo}/actions/workflows/update-btc-analysis.yml`;
+  }
+  return 'https://github.com/OWNER/REPO/actions/workflows/update-btc-analysis.yml';
+}
+
+function updateWorkflowLink() {
+  const tag = encodeURIComponent(analysisTagInput.value.trim() || 'Manual run');
+  const context = encodeURIComponent(analysisContextInput.value.trim() || 'Aucun contexte');
+  const base = inferRepoActionsUrl();
+  requestUpdateBtn.href = `${base}?query=event%3Aworkflow_dispatch&tag=${tag}&context=${context}`;
+}
+
+
+function syncLaunchLockUi() {
+  if (launchUnlocked) {
+    requestUpdateBtn.classList.remove('btn-disabled');
+    requestUpdateBtn.removeAttribute('aria-disabled');
+    if (!aiStatus.textContent.includes('chargée')) {
+      aiStatus.textContent = '✅ Déverrouillé : lancement workflow autorisé pour cette session.';
+    }
+  } else {
+    requestUpdateBtn.classList.add('btn-disabled');
+    requestUpdateBtn.setAttribute('aria-disabled', 'true');
+  }
+}
+
+function tryUnlockLaunch() {
+  const candidate = launchPasswordInput.value;
+  if (candidate === REQUIRED_LAUNCH_PASSWORD) {
+    launchUnlocked = true;
+    sessionStorage.setItem('btcLaunchUnlocked', '1');
+    launchPasswordInput.value = '';
+    syncLaunchLockUi();
+    return true;
+  }
+  aiStatus.textContent = '⛔ Mot de passe invalide pour lancer une nouvelle analyse.';
+  return false;
+}
+
+requestUpdateBtn.addEventListener('click', (event) => {
+  if (!launchUnlocked && !tryUnlockLaunch()) {
+    event.preventDefault();
+    return;
+  }
+});
+
+launchPasswordInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    tryUnlockLaunch();
+  }
+});
+
+runAnalysisBtn.addEventListener('click', loadPublishedVersions);
+exportVersionsBtn.addEventListener('click', exportVersions);
+versionSelect.addEventListener('change', renderSelectedVersion);
+analysisTagInput.addEventListener('input', updateWorkflowLink);
+analysisContextInput.addEventListener('input', updateWorkflowLink);
+
+updateWorkflowLink();
+syncLaunchLockUi();
+loadPublishedVersions();
 
 // ════════════════════════════════════════════════
 // CHART 1 — Trajectory (line chart)
