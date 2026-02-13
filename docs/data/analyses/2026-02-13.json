@@ -1,243 +1,222 @@
 {
   "generated_at": "2026-02-13T14:00:00Z",
   "data_sources": [
-    "CoinMarketCap",
+    "Yahoo Finance",
+    "CNBC",
     "CoinDesk",
-    "Glassnode",
-    "CryptoQuant",
     "Standard Chartered",
     "JPMorgan",
-    "Goldman Sachs",
+    "Bernstein",
+    "CryptoQuant",
+    "CoinGlass",
+    "Alternative.me",
+    "Farside Investors",
     "Federal Reserve",
-    "Bloomberg",
-    "CNBC",
-    "Bernstein"
+    "Bloomberg Law",
+    "TRM Labs",
+    "Grayscale Research"
   ],
   "market_snapshot": {
-    "price_usd": 66650,
-    "change_24h_pct": -1.58,
-    "market_cap_usd": 1340000000000,
-    "volume_24h_usd": 44800000000,
+    "price_usd": 66063,
+    "change_24h_pct": -2.12,
+    "market_cap_usd": 1308815965605,
+    "volume_24h_usd": 78060000000,
     "fear_greed_index": 8,
     "fear_greed_label": "Extreme Fear",
-    "dominance_pct": 56.3,
-    "ath": 126000,
-    "ath_date": "2025-10-15",
-    "drawdown_from_ath_pct": -47.1,
-    "months_since_halving": 10
+    "dominance_pct": 55.4,
+    "ath": 126080,
+    "ath_date": "October 2025",
+    "drawdown_from_ath_pct": -47.6,
+    "months_since_halving": 21
   },
   "macro_context": {
     "fed_rate": "3.50-3.75%",
-    "fed_outlook": "Patient stance, data-dependent, 2 potential cuts priced for 2026, new chair Kevin Warsh nomination May 2026",
-    "global_liquidity_trend": "expanding",
-    "sp500_trend": "Strong performance +17% vs BTC -7% YTD",
-    "dxy_trend": "Resilient around 97.6, showing inverse correlation with BTC",
+    "fed_outlook": "Pause maintenu en janvier 2026, Kevin Warsh nommé pour remplacer Powell en mai 2026, attentes de 1-2 baisses dans l'année",
+    "global_liquidity_trend": "neutral",
+    "sp500_trend": "Volatilité élevée, corrélation BTC 93%",
+    "dxy_trend": "Stable à fort",
     "key_macro_events": [
-      "Fed balance sheet expansion via T-bill purchases",
-      "Kevin Warsh Fed chair nomination",
-      "Inflation expectations elevated",
-      "Treasury bill purchases until April 2026"
+      "Nomination Kevin Warsh Fed Chair",
+      "Fin mandat Powell mai 2026",
+      "Révisions emplois -862K",
+      "Attentes CPI février"
     ]
   },
   "onchain_signals": {
-    "etf_flows_weekly": "-693M$ in February, -6.8B$ over 4 months",
-    "whale_accumulation": "Mixed - 66,940 BTC moved to accumulation wallets Feb 6, but large holders (1K-10K BTC) reduced by 220K BTC over past year",
-    "miner_behavior": "Production costs ~$77,000, some margin compression, hash rate showing network consolidation",
+    "etf_flows_weekly": "-693M$ en février, -5.7B$ depuis novembre 2025",
+    "whale_accumulation": "66,940 BTC accumulés le 6 février, plus forte accumulation depuis 2022",
+    "miner_behavior": "Prix sous coût production estimé 77-87K$, risque capitulation mineurs",
     "exchange_reserves_trend": "decreasing",
     "key_onchain_insights": [
-      "Extreme capitulation SOPR 0.7",
-      "97% supply previously in profit",
-      "Exchange whale ratio climbing to 0.504",
-      "UTXO count at 166.6M lowest since April 2024"
+      "ETF détiennent 1.29M BTC (-6% depuis octobre)",
+      "SOPR sous 1 signale capitulation",
+      "Réserves exchanges en baisse 30j SMA 3.2%"
     ]
   },
   "regulatory_update": {
-    "us_regulation": "Major progress - SEC approved generic listing standards for crypto ETFs, accelerating timelines from 240 to 75 days. Paul Atkins launched Project Crypto and token taxonomy initiative",
-    "global_regulation": "EU MiCA framework active, UK developing stablecoin regime, Singapore MAS standards, UAE guidelines, Brazil/Kyrgyzstan Bitcoin reserve legislation passed",
+    "us_regulation": "GENIUS Act signé juillet 2025, implémentation 2026. Clarity Act en cours. SEC Paul Atkins prépare exemption innovation",
+    "global_regulation": "MiCA EU pleinement implémentée. Brésil BCB autorisation février 2026. Suisse nouvelles licences crypto consultation",
     "key_regulatory_events": [
-      "GENIUS Act passed for stablecoins",
-      "SEC/CFTC cooperation framework",
-      "End of 'crypto turf war'",
-      "Crypto ETF generic listing approval"
+      "GENIUS Act implémentation 2026",
+      "Brazil BCB oversight février 2026",
+      "Switzerland crypto licenses consultation",
+      "China Ban 2.0 février 2026"
     ]
   },
   "institutional_views": [
     {
-      "firm": "Standard Chartered",
-      "target": "$150,000 (revised down from $300,000)",
-      "timeframe": "End 2026",
+      "firm": "JPMorgan",
+      "target": "266,000$ long terme",
+      "timeframe": "Long terme (irréaliste 2026)",
       "stance": "bullish",
-      "key_argument": "ETF inflows offset by DAT buying slowdown, but regulatory clarity supports institutional adoption"
+      "key_argument": "Bitcoin plus attractif que l'or sur base volatilité ajustée, ratio BTC/or 1.5 record bas"
     },
     {
-      "firm": "JPMorgan",
-      "target": "$165,000-$170,000",
-      "timeframe": "End 2026",
-      "stance": "bullish",
-      "key_argument": "Undervalued vs gold on volatility-adjusted basis, tokenization wave, debasement trade"
+      "firm": "Standard Chartered",
+      "target": "100,000$ (révisé de 150K$)",
+      "timeframe": "Fin 2026",
+      "stance": "neutral",
+      "key_argument": "Capitulation finale possible vers 50K$ avant reprise, demande corporate finie"
     },
     {
       "firm": "Bernstein",
-      "target": "$150,000 (2026), $200,000 (2027)",
-      "timeframe": "2026-2027",
-      "stance": "bullish",
-      "key_argument": "Elongated cycle driven by institutional capital, breaking traditional 4-year pattern"
-    },
-    {
-      "firm": "Goldman Sachs",
-      "target": "$200,000",
+      "target": "150,000$",
       "timeframe": "2026",
       "stance": "bullish",
-      "key_argument": "Regulatory clarity driving institutional adoption, constructive rate environment"
+      "key_argument": "Plus faible bear case de l'histoire, adoption institutionnelle structurelle, climat réglementaire favorable"
     },
     {
-      "firm": "Fidelity",
-      "target": "$65,000-$75,000",
-      "timeframe": "2026",
-      "stance": "bearish",
-      "key_argument": "Year off in four-year cycle, expects consolidation before next leg up"
+      "firm": "Grayscale",
+      "target": "Nouveau ATH H1 2026",
+      "timeframe": "Premier semestre 2026",
+      "stance": "bullish",
+      "key_argument": "Fin du cycle 4 ans, demande macro pour réserves de valeur alternatives"
     }
   ],
   "scenarios": {
     "pessimiste": {
       "probability_pct": 25,
-      "top_usd": 67000,
-      "bottom_low_usd": 45000,
-      "bottom_high_usd": 55000,
+      "top_usd": 66000,
+      "bottom_low_usd": 40000,
+      "bottom_high_usd": 50000,
       "end_year_usd": 75000,
-      "drawdown_max_pct": -65,
-      "bottom_timing": "Q2 2026",
+      "drawdown_max_pct": -68,
+      "bottom_timing": "Été 2026",
       "next_cycle_top_usd": 200000,
-      "context": "Macro headwinds intensify avec Fed hawkish pivot, regulatory pushback, et institutional selling cascade",
-      "narrative": "Le cycle de 4 ans reprend le dessus avec bear market traditionnel. ETF outflows s'accélèrent, liquidité globale se contracte, corrélation avec équities augmente. Capitulation finale des long-term holders avant cycle suivant en 2028-2029.",
+      "context": "Récession globale, politiques fiscales restrictives, liquidations massives ETF",
+      "narrative": "Bitcoin suit pattern 2022 avec capitulation finale. Cycle traditionnel 4 ans respecté avec bear market prolongé. Sortie institutionnelle massive sur perte de confiance macro. Remontée lente post-2027 avec nouveau cycle halving 2028.",
       "aligned_analysts": [
-        "Fidelity",
-        "Fundstrat (Sean Farrell)",
-        "Carol Alexander bear case"
+        "Peter Brandt",
+        "Standard Chartered",
+        "CryptoQuant"
       ],
       "key_conditions": [
-        "Fed rate hikes",
-        "Regulatory crackdown",
-        "ETF massive outflows",
-        "Global liquidity contraction",
-        "Geopolitical crisis"
+        "Récession US confirmée",
+        "Hausse Fed rates imprévu",
+        "Liquidation massive DATs",
+        "Breakdown technique majeur"
       ]
     },
     "neutre": {
       "probability_pct": 50,
-      "top_current_cycle_usd": 150000,
-      "bottom_low_usd": 65000,
-      "bottom_high_usd": 80000,
+      "top_current_cycle_usd": 126080,
+      "bottom_low_usd": 55000,
+      "bottom_high_usd": 75000,
       "end_year_usd": 120000,
-      "drawdown_max_pct": -50,
-      "bottom_timing": "Q1-Q2 2026",
-      "next_cycle_top_low_usd": 300000,
-      "next_cycle_top_high_usd": 500000,
+      "drawdown_max_pct": -52,
+      "bottom_timing": "Q2 2026",
+      "next_cycle_top_low_usd": 250000,
+      "next_cycle_top_high_usd": 400000,
       "next_cycle_top_timing": "2028-2029",
-      "context": "Consolidation prolongée avec volatilité réduite, institutional adoption steady mais pas explosive",
-      "narrative": "Bitcoin entre dans phase de maturation avec volatilité décroissante. ETFs stabilisent flows, institutional adoption continue graduellement. Support technique solide autour $70K. Range trading extended avant breakout structurel fin 2026.",
+      "context": "Consolidation prolongée avec volatilité élevée, adoption institutionnelle graduelle",
+      "narrative": "Bitcoin mature dans range 55-150K$ pendant 2026. ETF stabilisent après outflows initiaux. Cycle 4 ans étendu mais intact. Réglementation favorable soutient adoption progressive. Nouvelle hausse post-2027 avec catalyseurs institutionnels.",
       "aligned_analysts": [
-        "Standard Chartered",
-        "Bernstein",
-        "CNBC consensus",
-        "InvestingHaven"
+        "Carol Alexander",
+        "CoinShares",
+        "CNBC Consensus"
       ],
       "key_conditions": [
-        "Fed pause",
-        "Steady ETF flows",
-        "Regulatory clarity",
-        "Moderate institutional adoption",
-        "Stable macro environment"
+        "Fed dovish H2 2026",
+        "Clarity Act adopté",
+        "ETF flows stabilisation",
+        "Consolidation technique"
       ]
     },
     "optimiste": {
       "probability_pct": 25,
-      "top_low_usd": 200000,
-      "top_high_usd": 250000,
-      "bottom_low_usd": 85000,
-      "bottom_high_usd": 100000,
-      "end_year_usd": 180000,
-      "drawdown_max_pct": -25,
-      "bottom_timing": "Q1 2026",
+      "top_low_usd": 150000,
+      "top_high_usd": 225000,
+      "bottom_low_usd": 90000,
+      "bottom_high_usd": 110000,
+      "end_year_usd": 175000,
+      "drawdown_max_pct": -30,
+      "bottom_timing": "Mars-avril 2026",
       "super_cycle_target_usd": 500000,
-      "context": "Super cycle confirmé avec institutional FOMO, regulatory breakthrough, et monetary debasement acceleration",
-      "narrative": "Bitcoin breaks 4-year cycle définitivement. Massive institutional allocation via ETFs, sovereign adoption accelerates, Fed dovish pivot stimulates risk assets. New paradigm de store of value digital confirmé avec multiple expansion permanent.",
+      "context": "Super cycle institutionnel, fin pattern 4 ans, adoption massive",
+      "narrative": "Bitcoin break cycle traditionnel avec nouvelle vague institutionnelle. ETF reprennent inflows massifs post-clarté réglementaire. Warsh ultra-dovish déclenche rally liquide. Adoption corporate accélère. Nouveau paradigme prix sustained au-dessus 100K$.",
       "aligned_analysts": [
-        "JPMorgan",
-        "Goldman Sachs",
-        "Tom Lee",
+        "JPMorgan long terme",
+        "Bernstein",
         "Grayscale",
         "ARK Invest"
       ],
       "key_conditions": [
-        "Aggressive Fed cuts",
-        "Massive ETF inflows",
-        "Sovereign adoption",
-        "Currency debasement",
-        "Institutional FOMO",
-        "Breakthrough regulation"
+        "Super ETF inflows",
+        "Réglementations très favorables",
+        "Fed ultra-accommodante",
+        "Adoption massive corporate"
       ]
     }
   },
   "consensus": {
-    "market_sentiment": "Extreme fear domine mais whale accumulation suggère potential bottom formation. Institutional views remain constructively bullish long-term",
-    "institutional_consensus_range": "$120,000-$175,000",
-    "fair_value_median_usd": 150000,
-    "key_debate": "Traditional 4-year cycle vs institutional super-cycle - est-ce que ETFs et adoption institutionnelle changent fondamentalement la dynamique cyclique de Bitcoin?"
+    "market_sentiment": "Extreme Fear (8/100) mais signes accumulation institutionnelle contradictoires. Attente catalyseurs H1 2026.",
+    "institutional_consensus_range": "100K-175K$ fin 2026",
+    "fair_value_median_usd": 120000,
+    "key_debate": "Fin du cycle 4 ans vs prolongement avec peak retardé. Impact réel adoption institutionnelle vs patterns historiques."
   },
   "risks": {
     "downside": [
       {
-        "risk": "Fed hawkish surprise",
-        "description": "Taux plus élevés plus longtemps que prévu",
+        "risk": "Capitulation mineurs",
+        "description": "Prix prolongé sous coût production 77-87K$ force arrêts mining",
         "probability": "medium"
       },
       {
-        "risk": "ETF massive outflows",
-        "description": "Institutional selling cascade",
+        "risk": "Liquidation ETF massive",
+        "description": "5.7B$ outflows déjà, entrée moyenne 90K$ en perte",
         "probability": "medium"
       },
       {
-        "risk": "Regulatory pushback",
-        "description": "Policy reversal ou banking restrictions",
+        "risk": "Récession globale",
+        "description": "Corrélation S&P500 93% expose Bitcoin au risque macro",
+        "probability": "medium"
+      },
+      {
+        "risk": "Politique fiscale restrictive",
+        "description": "Impact fiscal US plus important que Fed selon CCN",
         "probability": "low"
-      },
-      {
-        "risk": "Macro recession",
-        "description": "Risk-off environnement global",
-        "probability": "medium"
-      },
-      {
-        "risk": "Technical breakdown",
-        "description": "Loss of $60K support déclenche capitulation",
-        "probability": "medium"
       }
     ],
     "upside": [
       {
-        "risk": "Sovereign adoption wave",
-        "description": "Multiple countries add Bitcoin reserves",
+        "risk": "Super ETF inflows",
+        "description": "Retournement institutionnel massif post-clarté réglementaire",
         "probability": "medium"
       },
       {
-        "risk": "Fed dovish pivot",
-        "description": "Aggressive rate cuts stimulate risk assets",
-        "probability": "high"
-      },
-      {
-        "risk": "ETF supply shock",
-        "description": "Institutional demand dépasse supply available",
+        "risk": "Fed ultra-dovish",
+        "description": "Warsh plus accommodant qu'attendu, dévaluation dollar",
         "probability": "medium"
       },
       {
-        "risk": "Currency crisis",
-        "description": "Safe haven demand spike",
-        "probability": "low"
+        "risk": "Regulatory clarity",
+        "description": "GENIUS Act + Clarity Act débloquent adoption institutionnelle",
+        "probability": "high"
       },
       {
-        "risk": "Breakthrough regulation",
-        "description": "Clear framework accélère adoption",
-        "probability": "high"
+        "risk": "Accumulation whale persistante",
+        "description": "66K BTC accumulés février, pattern 2022 bas",
+        "probability": "medium"
       }
     ]
   },
@@ -245,57 +224,95 @@
     "labels": [
       "ATH Oct25",
       "Actuel",
-      "Mars 2026",
+      "Bottom Q2",
       "Été 2026",
-      "Automne 2026",
-      "Fin 2026",
-      "Mi-2027",
-      "Fin 2027",
-      "Mi-2028",
-      "Fin 2028"
+      "Q4 2026",
+      "Q1 2027",
+      "Q2 2027",
+      "Q4 2027",
+      "2028",
+      "2029-30"
     ],
     "pessimiste": [
-      126000,
-      66650,
-      55000,
+      126080,
+      66063,
       45000,
+      40000,
+      75000,
+      85000,
+      95000,
+      120000,
+      150000,
+      200000
+    ],
+    "neutre": [
+      126080,
+      66063,
       65000,
       75000,
       120000,
-      180000,
-      200000,
-      220000
-    ],
-    "neutre": [
-      126000,
-      66650,
-      75000,
-      85000,
-      110000,
-      120000,
+      135000,
+      150000,
       180000,
       250000,
-      350000,
-      400000
+      350000
     ],
     "optimiste": [
-      126000,
-      66650,
+      126080,
+      66063,
       100000,
       150000,
+      175000,
       200000,
-      180000,
-      300000,
+      225000,
+      275000,
       400000,
-      500000,
-      750000
+      500000
     ]
   },
-  "weekly_summary": "Bitcoin traverse une phase de extreme fear avec Fear & Greed Index à 8, le plus bas depuis COVID-19. Whales accumulent massivement malgré le selloff, avec 66,940 BTC déplacés vers accumulation wallets. ETF outflows continuent (-693M$ en février) mais regulatory clarity s'améliore avec SEC generic listing standards. Institutional consensus reste bullish $120K-$175K end-2026 malgré near-term weakness.",
+  "weekly_summary": "Bitcoin traverse une période d'Extreme Fear (8/100) avec prix 66K$, en baisse -47% depuis ATH octobre. Paradoxalement, accumulation whale record (66K BTC) et signes techniques de capitulation (SOPR<1) suggèrent potentiel bottom. ETF continuent outflows (-693M$ février) mais rythme ralentit. Nominations Warsh Fed et implémentations réglementaires 2026 seront catalyseurs clés.",
   "changelog": [
     {
-      "type": "info",
-      "message": "Première analyse — pas de comparaison disponible."
+      "metric": "Prix BTC",
+      "from": 66650,
+      "to": 66063,
+      "change_pct": -0.9,
+      "direction": "down"
+    },
+    {
+      "metric": "Drawdown depuis ATH",
+      "from": -47.1,
+      "to": -47.6,
+      "change_pts": -0.5,
+      "direction": "down"
+    },
+    {
+      "metric": "Fear & Greed",
+      "from": 8,
+      "to": 8,
+      "change_pts": 0,
+      "direction": "down"
+    },
+    {
+      "metric": "Bottom pessimiste (bas)",
+      "from": 45000,
+      "to": 40000,
+      "change_pct": -11.1,
+      "direction": "down"
+    },
+    {
+      "metric": "Bottom neutre (bas)",
+      "from": 65000,
+      "to": 55000,
+      "change_pct": -15.4,
+      "direction": "down"
+    },
+    {
+      "metric": "Bottom optimiste (bas)",
+      "from": 85000,
+      "to": 90000,
+      "change_pct": 5.9,
+      "direction": "up"
     }
   ]
 }
