@@ -1,0 +1,301 @@
+{
+  "generated_at": "2026-02-13T14:00:00Z",
+  "data_sources": [
+    "CoinMarketCap",
+    "CoinDesk",
+    "Glassnode",
+    "CryptoQuant",
+    "Standard Chartered",
+    "JPMorgan",
+    "Goldman Sachs",
+    "Federal Reserve",
+    "Bloomberg",
+    "CNBC",
+    "Bernstein"
+  ],
+  "market_snapshot": {
+    "price_usd": 66650,
+    "change_24h_pct": -1.58,
+    "market_cap_usd": 1340000000000,
+    "volume_24h_usd": 44800000000,
+    "fear_greed_index": 8,
+    "fear_greed_label": "Extreme Fear",
+    "dominance_pct": 56.3,
+    "ath": 126000,
+    "ath_date": "2025-10-15",
+    "drawdown_from_ath_pct": -47.1,
+    "months_since_halving": 10
+  },
+  "macro_context": {
+    "fed_rate": "3.50-3.75%",
+    "fed_outlook": "Patient stance, data-dependent, 2 potential cuts priced for 2026, new chair Kevin Warsh nomination May 2026",
+    "global_liquidity_trend": "expanding",
+    "sp500_trend": "Strong performance +17% vs BTC -7% YTD",
+    "dxy_trend": "Resilient around 97.6, showing inverse correlation with BTC",
+    "key_macro_events": [
+      "Fed balance sheet expansion via T-bill purchases",
+      "Kevin Warsh Fed chair nomination",
+      "Inflation expectations elevated",
+      "Treasury bill purchases until April 2026"
+    ]
+  },
+  "onchain_signals": {
+    "etf_flows_weekly": "-693M$ in February, -6.8B$ over 4 months",
+    "whale_accumulation": "Mixed - 66,940 BTC moved to accumulation wallets Feb 6, but large holders (1K-10K BTC) reduced by 220K BTC over past year",
+    "miner_behavior": "Production costs ~$77,000, some margin compression, hash rate showing network consolidation",
+    "exchange_reserves_trend": "decreasing",
+    "key_onchain_insights": [
+      "Extreme capitulation SOPR 0.7",
+      "97% supply previously in profit",
+      "Exchange whale ratio climbing to 0.504",
+      "UTXO count at 166.6M lowest since April 2024"
+    ]
+  },
+  "regulatory_update": {
+    "us_regulation": "Major progress - SEC approved generic listing standards for crypto ETFs, accelerating timelines from 240 to 75 days. Paul Atkins launched Project Crypto and token taxonomy initiative",
+    "global_regulation": "EU MiCA framework active, UK developing stablecoin regime, Singapore MAS standards, UAE guidelines, Brazil/Kyrgyzstan Bitcoin reserve legislation passed",
+    "key_regulatory_events": [
+      "GENIUS Act passed for stablecoins",
+      "SEC/CFTC cooperation framework",
+      "End of 'crypto turf war'",
+      "Crypto ETF generic listing approval"
+    ]
+  },
+  "institutional_views": [
+    {
+      "firm": "Standard Chartered",
+      "target": "$150,000 (revised down from $300,000)",
+      "timeframe": "End 2026",
+      "stance": "bullish",
+      "key_argument": "ETF inflows offset by DAT buying slowdown, but regulatory clarity supports institutional adoption"
+    },
+    {
+      "firm": "JPMorgan",
+      "target": "$165,000-$170,000",
+      "timeframe": "End 2026",
+      "stance": "bullish",
+      "key_argument": "Undervalued vs gold on volatility-adjusted basis, tokenization wave, debasement trade"
+    },
+    {
+      "firm": "Bernstein",
+      "target": "$150,000 (2026), $200,000 (2027)",
+      "timeframe": "2026-2027",
+      "stance": "bullish",
+      "key_argument": "Elongated cycle driven by institutional capital, breaking traditional 4-year pattern"
+    },
+    {
+      "firm": "Goldman Sachs",
+      "target": "$200,000",
+      "timeframe": "2026",
+      "stance": "bullish",
+      "key_argument": "Regulatory clarity driving institutional adoption, constructive rate environment"
+    },
+    {
+      "firm": "Fidelity",
+      "target": "$65,000-$75,000",
+      "timeframe": "2026",
+      "stance": "bearish",
+      "key_argument": "Year off in four-year cycle, expects consolidation before next leg up"
+    }
+  ],
+  "scenarios": {
+    "pessimiste": {
+      "probability_pct": 25,
+      "top_usd": 67000,
+      "bottom_low_usd": 45000,
+      "bottom_high_usd": 55000,
+      "end_year_usd": 75000,
+      "drawdown_max_pct": -65,
+      "bottom_timing": "Q2 2026",
+      "next_cycle_top_usd": 200000,
+      "context": "Macro headwinds intensify avec Fed hawkish pivot, regulatory pushback, et institutional selling cascade",
+      "narrative": "Le cycle de 4 ans reprend le dessus avec bear market traditionnel. ETF outflows s'accélèrent, liquidité globale se contracte, corrélation avec équities augmente. Capitulation finale des long-term holders avant cycle suivant en 2028-2029.",
+      "aligned_analysts": [
+        "Fidelity",
+        "Fundstrat (Sean Farrell)",
+        "Carol Alexander bear case"
+      ],
+      "key_conditions": [
+        "Fed rate hikes",
+        "Regulatory crackdown",
+        "ETF massive outflows",
+        "Global liquidity contraction",
+        "Geopolitical crisis"
+      ]
+    },
+    "neutre": {
+      "probability_pct": 50,
+      "top_current_cycle_usd": 150000,
+      "bottom_low_usd": 65000,
+      "bottom_high_usd": 80000,
+      "end_year_usd": 120000,
+      "drawdown_max_pct": -50,
+      "bottom_timing": "Q1-Q2 2026",
+      "next_cycle_top_low_usd": 300000,
+      "next_cycle_top_high_usd": 500000,
+      "next_cycle_top_timing": "2028-2029",
+      "context": "Consolidation prolongée avec volatilité réduite, institutional adoption steady mais pas explosive",
+      "narrative": "Bitcoin entre dans phase de maturation avec volatilité décroissante. ETFs stabilisent flows, institutional adoption continue graduellement. Support technique solide autour $70K. Range trading extended avant breakout structurel fin 2026.",
+      "aligned_analysts": [
+        "Standard Chartered",
+        "Bernstein",
+        "CNBC consensus",
+        "InvestingHaven"
+      ],
+      "key_conditions": [
+        "Fed pause",
+        "Steady ETF flows",
+        "Regulatory clarity",
+        "Moderate institutional adoption",
+        "Stable macro environment"
+      ]
+    },
+    "optimiste": {
+      "probability_pct": 25,
+      "top_low_usd": 200000,
+      "top_high_usd": 250000,
+      "bottom_low_usd": 85000,
+      "bottom_high_usd": 100000,
+      "end_year_usd": 180000,
+      "drawdown_max_pct": -25,
+      "bottom_timing": "Q1 2026",
+      "super_cycle_target_usd": 500000,
+      "context": "Super cycle confirmé avec institutional FOMO, regulatory breakthrough, et monetary debasement acceleration",
+      "narrative": "Bitcoin breaks 4-year cycle définitivement. Massive institutional allocation via ETFs, sovereign adoption accelerates, Fed dovish pivot stimulates risk assets. New paradigm de store of value digital confirmé avec multiple expansion permanent.",
+      "aligned_analysts": [
+        "JPMorgan",
+        "Goldman Sachs",
+        "Tom Lee",
+        "Grayscale",
+        "ARK Invest"
+      ],
+      "key_conditions": [
+        "Aggressive Fed cuts",
+        "Massive ETF inflows",
+        "Sovereign adoption",
+        "Currency debasement",
+        "Institutional FOMO",
+        "Breakthrough regulation"
+      ]
+    }
+  },
+  "consensus": {
+    "market_sentiment": "Extreme fear domine mais whale accumulation suggère potential bottom formation. Institutional views remain constructively bullish long-term",
+    "institutional_consensus_range": "$120,000-$175,000",
+    "fair_value_median_usd": 150000,
+    "key_debate": "Traditional 4-year cycle vs institutional super-cycle - est-ce que ETFs et adoption institutionnelle changent fondamentalement la dynamique cyclique de Bitcoin?"
+  },
+  "risks": {
+    "downside": [
+      {
+        "risk": "Fed hawkish surprise",
+        "description": "Taux plus élevés plus longtemps que prévu",
+        "probability": "medium"
+      },
+      {
+        "risk": "ETF massive outflows",
+        "description": "Institutional selling cascade",
+        "probability": "medium"
+      },
+      {
+        "risk": "Regulatory pushback",
+        "description": "Policy reversal ou banking restrictions",
+        "probability": "low"
+      },
+      {
+        "risk": "Macro recession",
+        "description": "Risk-off environnement global",
+        "probability": "medium"
+      },
+      {
+        "risk": "Technical breakdown",
+        "description": "Loss of $60K support déclenche capitulation",
+        "probability": "medium"
+      }
+    ],
+    "upside": [
+      {
+        "risk": "Sovereign adoption wave",
+        "description": "Multiple countries add Bitcoin reserves",
+        "probability": "medium"
+      },
+      {
+        "risk": "Fed dovish pivot",
+        "description": "Aggressive rate cuts stimulate risk assets",
+        "probability": "high"
+      },
+      {
+        "risk": "ETF supply shock",
+        "description": "Institutional demand dépasse supply available",
+        "probability": "medium"
+      },
+      {
+        "risk": "Currency crisis",
+        "description": "Safe haven demand spike",
+        "probability": "low"
+      },
+      {
+        "risk": "Breakthrough regulation",
+        "description": "Clear framework accélère adoption",
+        "probability": "high"
+      }
+    ]
+  },
+  "trajectory_projections": {
+    "labels": [
+      "ATH Oct25",
+      "Actuel",
+      "Mars 2026",
+      "Été 2026",
+      "Automne 2026",
+      "Fin 2026",
+      "Mi-2027",
+      "Fin 2027",
+      "Mi-2028",
+      "Fin 2028"
+    ],
+    "pessimiste": [
+      126000,
+      66650,
+      55000,
+      45000,
+      65000,
+      75000,
+      120000,
+      180000,
+      200000,
+      220000
+    ],
+    "neutre": [
+      126000,
+      66650,
+      75000,
+      85000,
+      110000,
+      120000,
+      180000,
+      250000,
+      350000,
+      400000
+    ],
+    "optimiste": [
+      126000,
+      66650,
+      100000,
+      150000,
+      200000,
+      180000,
+      300000,
+      400000,
+      500000,
+      750000
+    ]
+  },
+  "weekly_summary": "Bitcoin traverse une phase de extreme fear avec Fear & Greed Index à 8, le plus bas depuis COVID-19. Whales accumulent massivement malgré le selloff, avec 66,940 BTC déplacés vers accumulation wallets. ETF outflows continuent (-693M$ en février) mais regulatory clarity s'améliore avec SEC generic listing standards. Institutional consensus reste bullish $120K-$175K end-2026 malgré near-term weakness.",
+  "changelog": [
+    {
+      "type": "info",
+      "message": "Première analyse — pas de comparaison disponible."
+    }
+  ]
+}

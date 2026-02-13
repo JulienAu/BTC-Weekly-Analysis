@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "date": "2026-02-13",
+    "filename": "2026-02-13.json",
+    "generated_at": "2026-02-13T14:00:00Z",
+    "price_usd": 66650,
+    "fear_greed": 8,
+    "drawdown_pct": -47.1,
+    "summary": "Bitcoin traverse une phase de extreme fear avec Fear & Greed Index à 8, le plus bas depuis COVID-19. Whales accumulent massivement malgré le selloff, avec 66,940 BTC déplacés vers accumulation wallets. ETF outflows continuent (-693M$ en février) mais regulatory clarity s'améliore avec SEC generic listing standards. Institutional consensus reste bullish $120K-$175K end-2026 malgré near-term weakness."
+  }
+]
