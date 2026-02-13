@@ -342,11 +342,11 @@ function renderScenarioCards(){
   const s=current.scenarios||{};
   const cards=[
     {k:'pessimiste',cls:'p',icon:'🔴',name:'Pessimiste',bdg:'r',
-      rows:v=>[['Top',fP(v.top_usd||v.top_current_cycle_usd),'cp'],['Bottom',fP(v.bottom_low_usd)+' – '+fP(v.bottom_high_usd),'cp'],['Drawdown max','–'+(v.drawdown_max_pct||0)+' %','cp'],['Timing bottom',v.bottom_timing||'',''],['Recovery',v.next_cycle_top_timing||'2028+','']]},
+      rows:v=>[['Top',fP(v.top_usd||v.top_current_cycle_usd),'cp'],['Bottom',fP(v.bottom_low_usd)+' – '+fP(v.bottom_high_usd),'cp'],['Drawdown max','–'+Math.abs(v.drawdown_max_pct||0)+' %','cp'],['Timing bottom',v.bottom_timing||'',''],['Recovery',v.next_cycle_top_timing||'2028+','']]},
     {k:'neutre',cls:'n',icon:'🟡',name:'Neutre',bdg:'y',
-      rows:v=>[['Top prochain cycle',fP(v.next_cycle_top_low_usd)+' – '+fP(v.next_cycle_top_high_usd),'cn'],['Bottom',fP(v.bottom_low_usd)+' – '+fP(v.bottom_high_usd),'cn'],['Drawdown max','–'+(v.drawdown_max_pct||0)+' %','cn'],['Timing bottom',v.bottom_timing||'',''],['Prochain top',v.next_cycle_top_timing||'','']]},
+      rows:v=>[['Top prochain cycle',fP(v.next_cycle_top_low_usd)+' – '+fP(v.next_cycle_top_high_usd),'cn'],['Bottom',fP(v.bottom_low_usd)+' – '+fP(v.bottom_high_usd),'cn'],['Drawdown max','–'+Math.abs(v.drawdown_max_pct||0)+' %','cn'],['Timing bottom',v.bottom_timing||'',''],['Prochain top',v.next_cycle_top_timing||'','']]},
     {k:'optimiste',cls:'o',icon:'🟢',name:'Optimiste',bdg:'g',
-      rows:v=>[['Top bull',fP(v.top_low_usd)+' – '+fP(v.top_high_usd),'co'],['Bottom',fP(v.bottom_low_usd)+' – '+fP(v.bottom_high_usd),'co'],['Drawdown max','–'+(v.drawdown_max_pct||0)+' %','co'],['Timing bottom',v.bottom_timing||'',''],['Super-cycle',fP(v.super_cycle_target_usd)||'','']]}
+      rows:v=>[['Top bull',fP(v.top_low_usd)+' – '+fP(v.top_high_usd),'co'],['Bottom',fP(v.bottom_low_usd)+' – '+fP(v.bottom_high_usd),'co'],['Drawdown max','–'+Math.abs(v.drawdown_max_pct||0)+' %','co'],['Timing bottom',v.bottom_timing||'',''],['Super-cycle',fP(v.super_cycle_target_usd)||'','']]}
   ];
   $('scCards').innerHTML=cards.map(c=>{
     const v=s[c.k]||{};const prob=v.probability_pct||0;
@@ -379,7 +379,7 @@ function renderCompare(){
   $('compTbl').innerHTML=`<thead><tr><th>Métrique</th><th>🔴 Pess.</th><th>🟡 Neutre</th><th>🟢 Opti.</th></tr></thead><tbody>
     <tr><td>Probabilité</td><td class="cp">${p.probability_pct||0} %</td><td class="cn">${n.probability_pct||0} %</td><td class="co">${o.probability_pct||0} %</td></tr>
     <tr><td>Bottom</td><td class="cp">${fP(p.bottom_low_usd)}–${fP(p.bottom_high_usd)}</td><td class="cn">${fP(n.bottom_low_usd)}–${fP(n.bottom_high_usd)}</td><td class="co">${fP(o.bottom_low_usd)}–${fP(o.bottom_high_usd)}</td></tr>
-    <tr><td>Drawdown max</td><td class="cp">–${p.drawdown_max_pct||0}%</td><td class="cn">–${n.drawdown_max_pct||0}%</td><td class="co">–${o.drawdown_max_pct||0}%</td></tr>
+    <tr><td>Drawdown max</td><td class="cp">–${Math.abs(p.drawdown_max_pct||0)}%</td><td class="cn">–${Math.abs(n.drawdown_max_pct||0)}%</td><td class="co">–${Math.abs(o.drawdown_max_pct||0)}%</td></tr>
     <tr><td>Fin année</td><td class="cp">${fP(p.end_year_usd)}</td><td class="cn">${fP(n.end_year_usd)}</td><td class="co">${fP(o.end_year_usd)}</td></tr>
     <tr><td>Timing bottom</td><td class="cp">${p.bottom_timing||''}</td><td class="cn">${n.bottom_timing||''}</td><td class="co">${o.bottom_timing||''}</td></tr>
     <tr><td>Contexte</td><td class="cp">${p.context||''}</td><td class="cn">${n.context||''}</td><td class="co">${o.context||''}</td></tr>
@@ -538,10 +538,13 @@ function renderCharts(){
     ]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:14}},tooltip:{callbacks:{label:c=>{const r=c.raw;return c.dataset.label+': '+fP(r[0])+' – '+fP(r[1])}}}},scales:{y:{ticks:{callback:v=>fmt(v)}},x:{grid:{display:false}}}}});
   }catch(e){console.warn('Range chart error:',e)}
 
-  // ── Drawdowns ──
+  // ── Drawdowns — use Math.abs because Claude may return negative or positive values ──
   try{
+    const pDD=-Math.abs(safeVal(p.drawdown_max_pct,75));
+    const nDD=-Math.abs(safeVal(n.drawdown_max_pct,55));
+    const oDD=-Math.abs(safeVal(o.drawdown_max_pct,45));
     charts.draw=new Chart($('cDraw'),{type:'bar',data:{labels:['Cycle 1\n2013','Cycle 2\n2017','Cycle 3\n2021','C4 Pess.','C4 Neutre','C4 Opti.'],
-      datasets:[{data:[-86,-84,-77,-safeVal(p.drawdown_max_pct,75),-safeVal(n.drawdown_max_pct,55),-safeVal(o.drawdown_max_pct,45)],
+      datasets:[{data:[-86,-84,-77,pDD,nDD,oDD],
         backgroundColor:['rgba(148,163,184,.4)','rgba(148,163,184,.4)','rgba(148,163,184,.4)','rgba(239,68,68,.6)','rgba(245,158,11,.6)','rgba(16,185,129,.6)'],
         borderColor:[TK,TK,TK,RED,YEL,GRN],borderWidth:1,borderRadius:5}]},
       options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x+'%'}}},scales:{x:{min:-100,max:0,ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}}}});
