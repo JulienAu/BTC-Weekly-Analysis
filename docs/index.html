@@ -484,46 +484,78 @@ function renderRisks(){
 }
 
 /* ═══ CHARTS ═══ */
+function safeVal(v,fallback){return(typeof v==='number'&&isFinite(v))?v:(fallback||0)}
 function renderCharts(){
   ['traj','range','draw','prob','horiz'].forEach(k=>{if(charts[k])charts[k].destroy()});
   const s=current.scenarios||{};const p=s.pessimiste||{},n=s.neutre||{},o=s.optimiste||{};
-  const tp=current.trajectory_projections;
 
-  // Trajectory
-  if(tp&&tp.labels){
-    charts.traj=new Chart($('cTraj'),{type:'line',data:{labels:tp.labels,datasets:[
-      {label:'Pessimiste',data:tp.pessimiste,borderColor:RED,fill:false,tension:.35,borderWidth:2.5,pointRadius:3},
-      {label:'Neutre',data:tp.neutre,borderColor:YEL,fill:false,tension:.35,borderWidth:2.5,pointRadius:3},
-      {label:'Optimiste',data:tp.optimiste,borderColor:GRN,fill:false,tension:.35,borderWidth:2.5,pointRadius:3}
-    ]},options:{responsive:true,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:14}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fP(c.parsed.y)}}},scales:{y:{ticks:{callback:v=>fmt(v)}},x:{grid:{display:false}}}}});
-  }
+  // ── Trajectory ──
+  try{
+    const tp=current.trajectory_projections;
+    if(tp&&tp.labels&&Array.isArray(tp.pessimiste)&&Array.isArray(tp.neutre)&&Array.isArray(tp.optimiste)){
+      charts.traj=new Chart($('cTraj'),{type:'line',data:{labels:tp.labels,datasets:[
+        {label:'Pessimiste',data:tp.pessimiste,borderColor:RED,fill:false,tension:.35,borderWidth:2.5,pointRadius:3},
+        {label:'Neutre',data:tp.neutre,borderColor:YEL,fill:false,tension:.35,borderWidth:2.5,pointRadius:3},
+        {label:'Optimiste',data:tp.optimiste,borderColor:GRN,fill:false,tension:.35,borderWidth:2.5,pointRadius:3}
+      ]},options:{responsive:true,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:14}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fP(c.parsed.y)}}},scales:{y:{ticks:{callback:v=>fmt(v)}},x:{grid:{display:false}}}}});
+    }
+  }catch(e){console.warn('Trajectory chart error:',e)}
 
-  // Ranges
-  charts.range=new Chart($('cRange'),{type:'bar',data:{labels:['Bottom 2026','Fin 2026','Top prochain cycle'],datasets:[
-    {label:'Pessimiste',data:[[p.bottom_low_usd||0,p.bottom_high_usd||0],[p.end_year_usd*0.9||0,p.end_year_usd||0],[p.next_cycle_top_usd*0.85||0,p.next_cycle_top_usd||0]],backgroundColor:'rgba(239,68,68,.6)',borderColor:RED,borderWidth:1,borderRadius:4},
-    {label:'Neutre',data:[[n.bottom_low_usd||0,n.bottom_high_usd||0],[n.end_year_usd*0.9||0,n.end_year_usd*1.1||0],[n.next_cycle_top_low_usd||0,n.next_cycle_top_high_usd||0]],backgroundColor:'rgba(245,158,11,.6)',borderColor:YEL,borderWidth:1,borderRadius:4},
-    {label:'Optimiste',data:[[o.bottom_low_usd||0,o.bottom_high_usd||0],[o.end_year_usd*0.9||0,o.end_year_usd*1.1||0],[o.top_low_usd||0,o.top_high_usd||0]],backgroundColor:'rgba(16,185,129,.6)',borderColor:GRN,borderWidth:1,borderRadius:4}
-  ]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:14}},tooltip:{callbacks:{label:c=>{const r=c.raw;return c.dataset.label+': '+fP(r[0])+' – '+fP(r[1])}}}},scales:{y:{ticks:{callback:v=>fmt(v)}},x:{grid:{display:false}}}}});
+  // ── Ranges — use comparable "best case top" per scenario ──
+  try{
+    // Pessimiste: next_cycle_top is modest recovery
+    const pTop=safeVal(p.next_cycle_top_usd,120000);
+    // Neutre: next cycle top range
+    const nTopLo=safeVal(n.next_cycle_top_low_usd,150000),nTopHi=safeVal(n.next_cycle_top_high_usd,250000);
+    // Optimiste: super-cycle target is the comparable "top", always >= neutre
+    const oTopForRange=Math.max(safeVal(o.super_cycle_target_usd,0),safeVal(o.top_high_usd,0),nTopHi*1.2);
 
-  // Drawdowns
-  charts.draw=new Chart($('cDraw'),{type:'bar',data:{labels:['Cycle 1\n2013','Cycle 2\n2017','Cycle 3\n2021','C4 Pess.','C4 Neutre','C4 Opti.'],
-    datasets:[{data:[-86,-84,-77,-(p.drawdown_max_pct||0),-(n.drawdown_max_pct||0),-(o.drawdown_max_pct||0)],
-      backgroundColor:['rgba(148,163,184,.4)','rgba(148,163,184,.4)','rgba(148,163,184,.4)','rgba(239,68,68,.6)','rgba(245,158,11,.6)','rgba(16,185,129,.6)'],
-      borderColor:[TK,TK,TK,RED,YEL,GRN],borderWidth:1,borderRadius:5}]},
-    options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x+'%'}}},scales:{x:{min:-100,max:0,ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}}}});
+    charts.range=new Chart($('cRange'),{type:'bar',data:{labels:['Bottom 2026','Fin 2026','Top potentiel'],datasets:[
+      {label:'Pessimiste',data:[
+        [safeVal(p.bottom_low_usd),safeVal(p.bottom_high_usd)],
+        [safeVal(p.end_year_usd)*0.9,safeVal(p.end_year_usd)],
+        [pTop*0.85,pTop]
+      ],backgroundColor:'rgba(239,68,68,.6)',borderColor:RED,borderWidth:1,borderRadius:4},
+      {label:'Neutre',data:[
+        [safeVal(n.bottom_low_usd),safeVal(n.bottom_high_usd)],
+        [safeVal(n.end_year_usd)*0.9,safeVal(n.end_year_usd)*1.1],
+        [nTopLo,nTopHi]
+      ],backgroundColor:'rgba(245,158,11,.6)',borderColor:YEL,borderWidth:1,borderRadius:4},
+      {label:'Optimiste',data:[
+        [safeVal(o.bottom_low_usd),safeVal(o.bottom_high_usd)],
+        [safeVal(o.end_year_usd)*0.9,safeVal(o.end_year_usd)*1.1],
+        [safeVal(o.top_high_usd,nTopHi),oTopForRange]
+      ],backgroundColor:'rgba(16,185,129,.6)',borderColor:GRN,borderWidth:1,borderRadius:4}
+    ]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:14}},tooltip:{callbacks:{label:c=>{const r=c.raw;return c.dataset.label+': '+fP(r[0])+' – '+fP(r[1])}}}},scales:{y:{ticks:{callback:v=>fmt(v)}},x:{grid:{display:false}}}}});
+  }catch(e){console.warn('Range chart error:',e)}
 
-  // Proba
-  charts.prob=new Chart($('cProb'),{type:'doughnut',data:{labels:['Pessimiste','Neutre','Optimiste','Autre'],
-    datasets:[{data:[p.probability_pct||0,n.probability_pct||0,o.probability_pct||0,100-(p.probability_pct||0)-(n.probability_pct||0)-(o.probability_pct||0)],
-      backgroundColor:[RED,YEL,GRN,'rgba(100,116,139,.3)'],borderColor:'rgba(0,0,0,.3)',borderWidth:2}]},
-    options:{responsive:true,cutout:'65%',plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:12}}}}});
+  // ── Drawdowns ──
+  try{
+    charts.draw=new Chart($('cDraw'),{type:'bar',data:{labels:['Cycle 1\n2013','Cycle 2\n2017','Cycle 3\n2021','C4 Pess.','C4 Neutre','C4 Opti.'],
+      datasets:[{data:[-86,-84,-77,-safeVal(p.drawdown_max_pct,75),-safeVal(n.drawdown_max_pct,55),-safeVal(o.drawdown_max_pct,45)],
+        backgroundColor:['rgba(148,163,184,.4)','rgba(148,163,184,.4)','rgba(148,163,184,.4)','rgba(239,68,68,.6)','rgba(245,158,11,.6)','rgba(16,185,129,.6)'],
+        borderColor:[TK,TK,TK,RED,YEL,GRN],borderWidth:1,borderRadius:5}]},
+      options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x+'%'}}},scales:{x:{min:-100,max:0,ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}}}});
+  }catch(e){console.warn('Drawdown chart error:',e)}
 
-  // Horizon
-  charts.horiz=new Chart($('cHoriz'),{type:'bar',data:{labels:['2026','2027–28','2029–30'],datasets:[
-    {label:'Pessimiste',data:[[p.bottom_low_usd||0,p.end_year_usd||0],[p.end_year_usd||0,p.next_cycle_top_usd||0],[p.next_cycle_top_usd*0.5||0,p.next_cycle_top_usd*1.2||0]],backgroundColor:'rgba(239,68,68,.5)',borderColor:RED,borderWidth:1,borderRadius:4},
-    {label:'Neutre',data:[[n.bottom_low_usd||0,n.end_year_usd*1.2||0],[n.end_year_usd||0,n.next_cycle_top_high_usd||0],[n.next_cycle_top_low_usd||0,n.next_cycle_top_high_usd*1.5||0]],backgroundColor:'rgba(245,158,11,.5)',borderColor:YEL,borderWidth:1,borderRadius:4},
-    {label:'Optimiste',data:[[o.bottom_low_usd||0,o.top_high_usd||0],[o.top_low_usd||0,o.super_cycle_target_usd||0],[o.top_high_usd||0,(o.super_cycle_target_usd||0)*1.5]],backgroundColor:'rgba(16,185,129,.5)',borderColor:GRN,borderWidth:1,borderRadius:4}
-  ]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:14}},tooltip:{callbacks:{label:c=>{const r=c.raw;return c.dataset.label+': '+fP(r[0])+' – '+fP(r[1])}}}},scales:{y:{type:'logarithmic',ticks:{callback:v=>fmt(v)}},x:{grid:{display:false}}}}});
+  // ── Proba ──
+  try{
+    const pp=safeVal(p.probability_pct,17.5),np=safeVal(n.probability_pct,45),op=safeVal(o.probability_pct,27.5);
+    charts.prob=new Chart($('cProb'),{type:'doughnut',data:{labels:['Pessimiste','Neutre','Optimiste','Autre'],
+      datasets:[{data:[pp,np,op,Math.max(0,100-pp-np-op)],
+        backgroundColor:[RED,YEL,GRN,'rgba(100,116,139,.3)'],borderColor:'rgba(0,0,0,.3)',borderWidth:2}]},
+      options:{responsive:true,cutout:'65%',plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:12}}}}});
+  }catch(e){console.warn('Proba chart error:',e)}
+
+  // ── Horizon ──
+  try{
+    const oSuperCycle=Math.max(safeVal(o.super_cycle_target_usd),safeVal(o.top_high_usd)*1.5,300000);
+    charts.horiz=new Chart($('cHoriz'),{type:'bar',data:{labels:['2026','2027–28','2029–30'],datasets:[
+      {label:'Pessimiste',data:[[safeVal(p.bottom_low_usd),safeVal(p.end_year_usd)],[safeVal(p.end_year_usd),safeVal(p.next_cycle_top_usd)],[safeVal(p.next_cycle_top_usd)*0.5,safeVal(p.next_cycle_top_usd)*1.2]],backgroundColor:'rgba(239,68,68,.5)',borderColor:RED,borderWidth:1,borderRadius:4},
+      {label:'Neutre',data:[[safeVal(n.bottom_low_usd),safeVal(n.end_year_usd)*1.2],[safeVal(n.end_year_usd),safeVal(n.next_cycle_top_high_usd)],[safeVal(n.next_cycle_top_low_usd),safeVal(n.next_cycle_top_high_usd)*1.5]],backgroundColor:'rgba(245,158,11,.5)',borderColor:YEL,borderWidth:1,borderRadius:4},
+      {label:'Optimiste',data:[[safeVal(o.bottom_low_usd),safeVal(o.top_high_usd)],[safeVal(o.top_low_usd),oSuperCycle],[oSuperCycle*0.7,oSuperCycle*1.5]],backgroundColor:'rgba(16,185,129,.5)',borderColor:GRN,borderWidth:1,borderRadius:4}
+    ]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:14}},tooltip:{callbacks:{label:c=>{const r=c.raw;return c.dataset.label+': '+fP(r[0])+' – '+fP(r[1])}}}},scales:{y:{type:'logarithmic',ticks:{callback:v=>fmt(v)}},x:{grid:{display:false}}}}});
+  }catch(e){console.warn('Horizon chart error:',e)}
 }
 
 /* ═══ TABS ═══ */
