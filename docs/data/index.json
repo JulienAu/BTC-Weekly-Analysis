@@ -2,10 +2,10 @@
   {
     "date": "2026-02-13",
     "filename": "2026-02-13.json",
-    "generated_at": "2026-02-13T14:00:00Z",
-    "price_usd": 66063,
-    "fear_greed": 8,
-    "drawdown_pct": -47.6,
-    "summary": "Bitcoin traverse une période d'Extreme Fear (8/100) avec prix 66K$, en baisse -47% depuis ATH octobre. Paradoxalement, accumulation whale record (66K BTC) et signes techniques de capitulation (SOPR<1) suggèrent potentiel bottom. ETF continuent outflows (-693M$ février) mais rythme ralentit. Nominations Warsh Fed et implémentations réglementaires 2026 seront catalyseurs clés."
+    "generated_at": "2026-02-13T14:30:00Z",
+    "price_usd": 66441,
+    "fear_greed": 9,
+    "drawdown_pct": -47.3,
+    "summary": "Bitcoin traverse une période critique à $66k avec Fear & Greed Index extrême (9). Standard Chartered a réduit sa cible 2026 à $100k contre $150k, alertant sur possible chute $50k. Cependant, les données on-chain révèlent une accumulation whale record (66,940 BTC le 6 février) malgré $8B de sorties ETF. Le CLARITY Act reste bloqué par la dispute yields stablecoins, avec deadline fin février cruciale. JPMorgan maintient sa vision bullish sur les flux institutionnels 2026."
   }
 ]
