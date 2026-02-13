@@ -228,6 +228,17 @@ def generate_analysis():
         else:
             raise ValueError("Could not extract valid JSON from Claude response")
 
+    # Override months_since_halving with correct calculation
+    # Bitcoin halving date: April 19, 2024
+    from datetime import date
+    halving_date = date(2024, 4, 19)
+    today = date.today()
+    months_since = (today.year - halving_date.year) * 12 + (today.month - halving_date.month)
+    if today.day < halving_date.day:
+        months_since -= 1
+    if "market_snapshot" in analysis:
+        analysis["market_snapshot"]["months_since_halving"] = months_since
+
     return analysis
 
 

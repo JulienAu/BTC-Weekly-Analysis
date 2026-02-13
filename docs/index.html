@@ -316,15 +316,24 @@ function renderSummary(){
 }
 
 /* ═══ KPIs ═══ */
+function calcMonthsSinceHalving(refDate){
+  // Bitcoin halving: April 19, 2024
+  const halving=new Date(2024,3,19);
+  const ref=refDate?new Date(refDate):new Date();
+  if(isNaN(ref.getTime()))return'--';
+  const diffMs=ref-halving;if(diffMs<0)return 0;
+  return Math.floor(diffMs/(30.4375*24*60*60*1000));
+}
 function renderKPIs(){
   const m=current.market_snapshot||{};
+  const monthsHalving=calcMonthsSinceHalving(current.generated_at);
   $('kpiRow').innerHTML=[
     {lb:'Prix BTC',vl:fP(m.price_usd),c:'--org',sm:dStr(current.generated_at)},
     {lb:'ATH cycle',vl:fP(m.ath),c:'--org',sm:m.ath_date||''},
     {lb:'Drawdown',vl:(m.drawdown_from_ath_pct||0)+'%',c:'--red',sm:'Depuis ATH'},
     {lb:'Fear & Greed',vl:m.fear_greed_index||'--',c:m.fear_greed_index<25?'--red':m.fear_greed_index<50?'--yel':'--grn',sm:m.fear_greed_label||''},
     {lb:'Dominance',vl:(m.dominance_pct||'--')+'%',c:'--blu',sm:'BTC dominance'},
-    {lb:'Mois post-halving',vl:m.months_since_halving||'--',c:'--blu',sm:'Avr. 2024'}
+    {lb:'Mois post-halving',vl:monthsHalving,c:'--blu',sm:'Halving: 19 avr. 2024'}
   ].map(k=>`<div class="kpi"><div class="lb">${k.lb}</div><div class="vl" style="color:var(${k.c})">${k.vl}</div><div class="sm">${k.sm}</div></div>`).join('');
 }
 
