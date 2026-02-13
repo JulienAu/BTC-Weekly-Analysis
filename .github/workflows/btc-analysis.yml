@@ -1,0 +1,94 @@
+name: Generate BTC Analysis
+
+on:
+  # Manual trigger from GitHub UI
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for manual run'
+        required: false
+        default: 'Manual weekly analysis'
+
+  # Automatic weekly schedule — every Sunday at 18:00 UTC
+  schedule:
+    - cron: '0 18 * * 0'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install anthropic
+
+      - name: Generate analysis
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python scripts/generate_analysis.py
+
+      - name: Copy data to docs for GitHub Pages
+        run: |
+          mkdir -p docs/data/analyses
+          cp data/index.json docs/data/
+          cp data/analyses/*.json docs/data/analyses/ 2>/dev/null || true
+
+      - name: Commit and push results
+        run: |
+          git config user.name "BTC Analysis Bot"
+          git config user.email "bot@btc-analysis.local"
+          git add data/ docs/data/
+          DATE=$(date -u +"%Y-%m-%d")
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "analysis: weekly update ${DATE}
+
+          Automated BTC scenario analysis generated via Claude API.
+          Triggered by: ${{ github.event_name }}"
+            git push
+          fi
+
+  # Deploy to GitHub Pages after analysis is committed
+  deploy:
+    needs: generate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Pull latest (includes new analysis)
+        run: git pull origin main
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './docs'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

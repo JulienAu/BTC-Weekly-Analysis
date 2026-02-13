@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BTC Scenarios Tracker</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0a0e17;--card:#111827;--brd:#1e293b;--t1:#f1f5f9;--t2:#94a3b8;--t3:#64748b;
+--red:#ef4444;--rbg:rgba(239,68,68,.12);--yel:#f59e0b;--ybg:rgba(245,158,11,.12);
+--grn:#10b981;--gbg:rgba(16,185,129,.12);--org:#f97316;--blu:#3b82f6;--grd:rgba(255,255,255,.05)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--t1);line-height:1.6}
+.wrap{max-width:1440px;margin:0 auto;padding:20px}
+
+/* Header */
+.hdr{text-align:center;padding:32px 20px 20px;border-bottom:1px solid var(--brd);margin-bottom:20px}
+.hdr h1{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,#f59e0b,#f97316);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hdr .sub{color:var(--t2);font-size:.88rem;margin-top:4px}
+.live-bar{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:14px;flex-wrap:wrap}
+.lc{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--card);border:1px solid var(--brd);border-radius:8px;font-size:.82rem}
+.lc .v{font-weight:700;font-size:1rem}
+.lc .v.price{color:var(--org)}.lc .v.up{color:var(--grn)}.lc .v.dn{color:var(--red)}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--grn);animation:p 2s infinite}
+@keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* Controls */
+.ctrl{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.sel{padding:8px 14px;background:var(--card);border:1px solid var(--brd);border-radius:8px;color:var(--t1);font-size:.85rem}
+.cnt{color:var(--t3);font-size:.8rem}
+.last-gen{color:var(--t2);font-size:.8rem;margin-left:auto}
+
+/* Tabs */
+.tabs{display:flex;gap:3px;margin-bottom:18px;background:var(--card);border-radius:10px;padding:3px;border:1px solid var(--brd);overflow-x:auto}
+.tb{flex:1;padding:9px 12px;border:none;background:0;color:var(--t3);font-size:.82rem;font-weight:600;border-radius:8px;cursor:pointer;transition:.2s;white-space:nowrap}
+.tb:hover{color:var(--t1);background:rgba(255,255,255,.04)}.tb.on{background:rgba(249,115,22,.15);color:var(--org)}
+.tb .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--org);margin-left:4px}
+.pn{display:none}.pn.on{display:block}
+
+/* Cards */
+.cd{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:22px;margin-bottom:18px}
+.cd h2{font-size:1.05rem;font-weight:700;margin-bottom:14px}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:20px}
+.kpi{background:var(--card);border:1px solid var(--brd);border-radius:9px;padding:14px;text-align:center}
+.kpi .lb{color:var(--t3);font-size:.7rem;text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px}
+.kpi .vl{font-size:1.25rem;font-weight:700}.kpi .sm{color:var(--t2);font-size:.75rem;margin-top:2px}
+
+/* Scenarios */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:14px;margin-bottom:18px}
+.sc{background:var(--card);border-radius:12px;border:1px solid var(--brd);overflow:hidden;transition:.2s}
+.sc:hover{transform:translateY(-2px)}
+.sc.p{border-top:3px solid var(--red)}.sc.n{border-top:3px solid var(--yel)}.sc.o{border-top:3px solid var(--grn)}
+.sc-hd{padding:18px 18px 10px;display:flex;justify-content:space-between;align-items:flex-start}
+.sc-hd h3{font-size:1rem;font-weight:700}
+.bdg{padding:3px 9px;border-radius:14px;font-size:.7rem;font-weight:700}
+.bdg.r{background:var(--rbg);color:var(--red)}.bdg.y{background:var(--ybg);color:var(--yel)}.bdg.g{background:var(--gbg);color:var(--grn)}
+.sc-bd{padding:0 18px 18px}
+.mr{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.82rem}
+.mr:last-child{border:0}.mr .ml{color:var(--t2)}.mr .mv{font-weight:600;text-align:right}
+.cp{color:var(--red)}.cn{color:var(--yel)}.co{color:var(--grn)}
+
+/* Charts */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+@media(max-width:900px){.cgrid,.sgrid{grid-template-columns:1fr}}
+
+/* Changelog */
+.cli{padding:14px;background:rgba(255,255,255,.02);border-radius:9px;margin-bottom:8px;border-left:3px solid var(--org);font-size:.85rem}
+.cli.up{border-left-color:var(--grn)}.cli.down{border-left-color:var(--red)}.cli.neutral{border-left-color:var(--yel)}
+.cli .cm{font-weight:700;margin-bottom:3px}.cli .cd2{color:var(--t2);font-size:.8rem}
+.arr{font-weight:700;margin:0 4px}.arr.up{color:var(--grn)}.arr.down{color:var(--red)}
+.empty{text-align:center;padding:32px;color:var(--t3)}
+
+/* History */
+.hr{display:flex;align-items:center;gap:14px;padding:12px 14px;background:rgba(255,255,255,.02);border-radius:9px;margin-bottom:7px;font-size:.85rem;cursor:pointer;border:1px solid transparent;transition:.2s}
+.hr:hover{border-color:var(--brd);background:rgba(255,255,255,.04)}
+.hr.act{border-color:var(--org);background:rgba(249,115,22,.06)}
+.hr .hd{font-weight:700;min-width:100px}.hr .hp{color:var(--org);font-weight:600;min-width:90px}
+.hr .hc{font-size:.8rem;min-width:70px}
+
+/* Institutional */
+.inst{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px;margin-bottom:14px}
+.inst-card{padding:14px;background:rgba(255,255,255,.02);border-radius:9px;border-left:3px solid var(--blu);font-size:.84rem}
+.inst-card .firm{font-weight:700;margin-bottom:4px}.inst-card .tgt{color:var(--org);font-weight:600}
+.inst-card .arg{color:var(--t2);font-size:.8rem;margin-top:4px}
+
+/* Risk */
+.rg{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:768px){.rg{grid-template-columns:1fr}}
+.rl{list-style:none;padding:0}.rl li{padding:9px 12px;background:rgba(255,255,255,.02);border-radius:7px;margin-bottom:5px;font-size:.83rem;border-left:3px solid;line-height:1.5}
+.rl.down li{border-left-color:var(--red)}.rl.up li{border-left-color:var(--grn)}
+.rl li strong{display:block;margin-bottom:1px}
+
+/* Summary */
+.summary-box{padding:20px;background:linear-gradient(135deg,rgba(249,115,22,.06),rgba(59,130,246,.06));border:1px solid rgba(249,115,22,.15);border-radius:12px;margin-bottom:18px;font-size:.9rem;line-height:1.7;color:var(--t2)}
+
+/* Table */
+.ctbl{width:100%;border-collapse:collapse;font-size:.82rem}
+.ctbl th{padding:9px 12px;text-align:left;font-weight:700;color:var(--t3);text-transform:uppercase;font-size:.7rem;letter-spacing:.4px;border-bottom:2px solid var(--brd)}
+.ctbl td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.04)}.ctbl tr:hover{background:rgba(255,255,255,.02)}
+
+.footer{text-align:center;padding:20px;color:var(--t3);font-size:.72rem;border-top:1px solid var(--brd);margin-top:20px}
+
+/* Loading */
+.loading-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:999}
+.loading-overlay.hidden{display:none}
+.loader{width:40px;height:40px;border:3px solid var(--brd);border-top-color:var(--org);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-overlay p{color:var(--t2);margin-top:16px;font-size:.9rem}
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loader"></div>
+  <p>Chargement des analyses...</p>
+</div>
+
+<div class="hdr">
+  <h1>₿ BTC Scenarios Tracker</h1>
+  <p class="sub">Analyses hebdomadaires automatisées · Données live · Versioning intégré</p>
+  <div class="live-bar">
+    <div class="lc"><span class="pulse"></span> BTC/USD <span class="v price" id="lP">--</span></div>
+    <div class="lc">24h <span class="v" id="lC">--</span></div>
+    <div class="lc">Cap. <span class="v" id="lM">--</span></div>
+    <div class="lc">Vol. <span class="v" id="lV">--</span></div>
+    <div class="lc">F&G <span class="v" id="lF">--</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="ctrl">
+    <select class="sel" id="vSel" onchange="switchVersion(this.value)"></select>
+    <span class="cnt" id="vCnt"></span>
+    <span class="last-gen" id="lastGen"></span>
+  </div>
+
+  <div class="tabs">
+    <button class="tb on" data-t="overview">Vue d'ensemble</button>
+    <button class="tb" data-t="scenarios">Scénarios</button>
+    <button class="tb" data-t="compare">Comparaison</button>
+    <button class="tb" data-t="changelog">Changelog<span class="dot" id="clDot" style="display:none"></span></button>
+    <button class="tb" data-t="evolution">Évolution</button>
+    <button class="tb" data-t="institutional">Institutionnels</button>
+    <button class="tb" data-t="history">Historique</button>
+    <button class="tb" data-t="risks">Risques</button>
+  </div>
+
+  <!-- Overview -->
+  <div class="pn on" id="p-overview">
+    <div id="summaryBox"></div>
+    <div class="kpis" id="kpiRow"></div>
+    <div class="cgrid">
+      <div class="cd"><h2>Trajectoire projetée</h2><canvas id="cTraj"></canvas></div>
+      <div class="cd"><h2>Fourchettes par horizon</h2><canvas id="cRange"></canvas></div>
+    </div>
+    <div class="cgrid">
+      <div class="cd"><h2>Drawdowns historiques vs projetés</h2><canvas id="cDraw"></canvas></div>
+      <div class="cd"><h2>Probabilités</h2><canvas id="cProb"></canvas></div>
+    </div>
+    <div class="sgrid" id="scCards"></div>
+  </div>
+
+  <!-- Scenarios detail -->
+  <div class="pn" id="p-scenarios"><div id="scDetail"></div></div>
+
+  <!-- Compare -->
+  <div class="pn" id="p-compare">
+    <div class="cd"><h2>Comparaison chiffrée</h2><div style="overflow-x:auto"><table class="ctbl" id="compTbl"></table></div></div>
+    <div class="cd"><h2>Fourchettes par horizon</h2><canvas id="cHoriz"></canvas></div>
+  </div>
+
+  <!-- Changelog -->
+  <div class="pn" id="p-changelog"><div class="cd"><h2>Changements depuis la dernière analyse</h2><div id="clContent"></div></div></div>
+
+  <!-- Evolution -->
+  <div class="pn" id="p-evolution">
+    <div class="cd"><h2>Évolution du prix BTC entre les analyses</h2><canvas id="cEvo"></canvas></div>
+    <div class="cgrid">
+      <div class="cd"><h2>Fear & Greed</h2><canvas id="cEvoF"></canvas></div>
+      <div class="cd"><h2>Drawdown depuis ATH</h2><canvas id="cEvoD"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Institutional -->
+  <div class="pn" id="p-institutional">
+    <div class="cd"><h2>Vues institutionnelles</h2><div class="inst" id="instGrid"></div></div>
+    <div class="cd"><h2>Contexte macro</h2><div id="macroCtx"></div></div>
+    <div class="cd"><h2>Signaux on-chain</h2><div id="onchainCtx"></div></div>
+  </div>
+
+  <!-- History -->
+  <div class="pn" id="p-history"><div class="cd"><h2>Historique des analyses</h2><div id="histList"></div></div></div>
+
+  <!-- Risks -->
+  <div class="pn" id="p-risks">
+    <div class="cd" style="text-align:center;background:linear-gradient(135deg,rgba(249,115,22,.06),rgba(59,130,246,.06));border-color:rgba(249,115,22,.15)">
+      <h3 style="color:var(--org);text-transform:uppercase;letter-spacing:.4px;font-size:.9rem;margin-bottom:6px" id="consensusTitle">Consensus institutionnel</h3>
+      <div style="font-size:1.6rem;font-weight:800" id="consensusRange"></div>
+      <p style="color:var(--t2);font-size:.83rem;margin-top:6px" id="consensusSub"></p>
+    </div>
+    <div class="cd"><h2>Risques de surprise</h2><div class="rg" id="risksGrid"></div></div>
+  </div>
+</div>
+
+<div class="footer">
+  Synthèse analytique automatisée via Claude API · Pas un conseil en investissement.<br>
+  <span id="footerSources"></span>
+</div>
+
+<script>
+/* ═══ CONFIG ═══ */
+// Base URL for fetching data — works both locally and on GitHub Pages
+const BASE_URL = (() => {
+  const loc = window.location;
+  // If on GitHub Pages (docs/ is served as root), data/ is at ../data/ relative to repo
+  // GitHub Pages serves from docs/, but we need data/ from the repo root
+  // So we use the raw GitHub content or a relative path
+  if (loc.hostname.includes('github.io')) {
+    // On GitHub Pages: fetch from the same repo via relative path
+    // The workflow copies data/ into docs/data/ before deploy
+    return './data';
+  }
+  // Local file or dev server
+  return '../data';
+})();
+
+const RED='#ef4444',YEL='#f59e0b',GRN='#10b981',ORG='#f97316',BLU='#3b82f6',GRD='rgba(255,255,255,.05)',TK='#64748b';
+Chart.defaults.color=TK;Chart.defaults.borderColor=GRD;
+Chart.defaults.font.family="-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif";
+
+let index=[];
+let analyses={};
+let current=null;
+let charts={};
+
+/* ═══ UTILS ═══ */
+const $=id=>document.getElementById(id);
+const fmt=n=>!n?'--':n>=1e9?(n/1e9).toFixed(1)+'Md$':n>=1e6?(n/1e6).toFixed(0)+'M$':n>=1e3?(n/1e3).toFixed(0)+'k$':Math.round(n)+'$';
+const fP=n=>!n?'--':n.toLocaleString('fr-FR',{maximumFractionDigits:0})+' $';
+const dStr=s=>{try{return new Date(s).toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'})}catch(e){return s}};
+
+/* ═══ LIVE TICKER ═══ */
+async function fetchLive(){
+  try{
+    const[pr,fg]=await Promise.allSettled([
+      fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_24hr_change=true&include_market_cap=true&include_24hr_vol=true').then(r=>r.json()),
+      fetch('https://api.alternative.me/fng/?limit=1').then(r=>r.json())
+    ]);
+    if(pr.status==='fulfilled'&&pr.value.bitcoin){
+      const b=pr.value.bitcoin;
+      $('lP').textContent=fP(b.usd);
+      const ch=b.usd_24h_change;$('lC').textContent=(ch>0?'+':'')+ch.toFixed(1)+'%';$('lC').className='v '+(ch>=0?'up':'dn');
+      $('lM').textContent=fmt(b.usd_market_cap);$('lV').textContent=fmt(b.usd_24h_vol);
+    }
+    if(fg.status==='fulfilled'&&fg.value.data){
+      const f=fg.value.data[0];$('lF').textContent=f.value+' — '+f.value_classification;
+      $('lF').className='v '+(f.value<25?'dn':f.value<50?'':'up');
+    }
+  }catch(e){console.warn(e)}
+}
+
+/* ═══ DATA LOADING ═══ */
+async function loadData(){
+  try{
+    const res=await fetch(BASE_URL+'/index.json');
+    if(!res.ok)throw new Error('No index.json found');
+    index=await res.json();
+    if(!index.length){$('loadingOverlay').classList.add('hidden');return}
+
+    // Load all analyses in parallel (or just latest few for performance)
+    const toLoad=index.slice(0,52);
+    const results=await Promise.allSettled(
+      toLoad.map(e=>fetch(BASE_URL+'/analyses/'+e.filename).then(r=>r.json()))
+    );
+    results.forEach((r,i)=>{if(r.status==='fulfilled')analyses[toLoad[i].date]=r.value});
+
+    current=analyses[index[0].date];
+    buildUI();
+  }catch(e){
+    console.warn('Could not load data:',e);
+    $('loadingOverlay').innerHTML='<p style="color:var(--t2)">Aucune analyse trouvée.<br>Lancez le GitHub Action pour générer la première analyse.</p>';
+  }
+}
+
+/* ═══ BUILD UI ═══ */
+function buildUI(){
+  $('loadingOverlay').classList.add('hidden');
+  buildVersionSelect();
+  if(current)renderAll();
+}
+
+function buildVersionSelect(){
+  const sel=$('vSel');
+  sel.innerHTML=index.map((e,i)=>`<option value="${e.date}" ${i===0?'selected':''}>${dStr(e.date)} — ${fP(e.price_usd)}</option>`).join('');
+  $('vCnt').textContent=index.length+' analyse'+(index.length>1?'s':'');
+  if(current)$('lastGen').textContent='Dernière: '+dStr(current.generated_at||index[0].date);
+}
+
+function switchVersion(date){
+  if(analyses[date]){current=analyses[date];renderAll()}
+}
+
+/* ═══ RENDER ALL ═══ */
+function renderAll(){
+  renderKPIs();renderSummary();renderScenarioCards();renderScenarioDetails();
+  renderCompare();renderChangelog();renderEvolution();renderHistory();
+  renderInstitutional();renderRisks();renderCharts();
+  if(index.length>=2)$('clDot').style.display='inline-block';
+}
+
+/* ═══ SUMMARY ═══ */
+function renderSummary(){
+  const s=current.weekly_summary;
+  $('summaryBox').innerHTML=s?`<div class="summary-box">${s}</div>`:'';
+}
+
+/* ═══ KPIs ═══ */
+function renderKPIs(){
+  const m=current.market_snapshot||{};
+  $('kpiRow').innerHTML=[
+    {lb:'Prix BTC',vl:fP(m.price_usd),c:'--org',sm:dStr(current.generated_at)},
+    {lb:'ATH cycle',vl:fP(m.ath),c:'--org',sm:m.ath_date||''},
+    {lb:'Drawdown',vl:(m.drawdown_from_ath_pct||0)+'%',c:'--red',sm:'Depuis ATH'},
+    {lb:'Fear & Greed',vl:m.fear_greed_index||'--',c:m.fear_greed_index<25?'--red':m.fear_greed_index<50?'--yel':'--grn',sm:m.fear_greed_label||''},
+    {lb:'Dominance',vl:(m.dominance_pct||'--')+'%',c:'--blu',sm:'BTC dominance'},
+    {lb:'Mois post-halving',vl:m.months_since_halving||'--',c:'--blu',sm:'Avr. 2024'}
+  ].map(k=>`<div class="kpi"><div class="lb">${k.lb}</div><div class="vl" style="color:var(${k.c})">${k.vl}</div><div class="sm">${k.sm}</div></div>`).join('');
+}
+
+/* ═══ SCENARIO CARDS ═══ */
+function renderScenarioCards(){
+  const s=current.scenarios||{};
+  const cards=[
+    {k:'pessimiste',cls:'p',icon:'🔴',name:'Pessimiste',bdg:'r',
+      rows:v=>[['Top',fP(v.top_usd||v.top_current_cycle_usd),'cp'],['Bottom',fP(v.bottom_low_usd)+' – '+fP(v.bottom_high_usd),'cp'],['Drawdown max','–'+(v.drawdown_max_pct||0)+' %','cp'],['Timing bottom',v.bottom_timing||'',''],['Recovery',v.next_cycle_top_timing||'2028+','']]},
+    {k:'neutre',cls:'n',icon:'🟡',name:'Neutre',bdg:'y',
+      rows:v=>[['Top prochain cycle',fP(v.next_cycle_top_low_usd)+' – '+fP(v.next_cycle_top_high_usd),'cn'],['Bottom',fP(v.bottom_low_usd)+' – '+fP(v.bottom_high_usd),'cn'],['Drawdown max','–'+(v.drawdown_max_pct||0)+' %','cn'],['Timing bottom',v.bottom_timing||'',''],['Prochain top',v.next_cycle_top_timing||'','']]},
+    {k:'optimiste',cls:'o',icon:'🟢',name:'Optimiste',bdg:'g',
+      rows:v=>[['Top bull',fP(v.top_low_usd)+' – '+fP(v.top_high_usd),'co'],['Bottom',fP(v.bottom_low_usd)+' – '+fP(v.bottom_high_usd),'co'],['Drawdown max','–'+(v.drawdown_max_pct||0)+' %','co'],['Timing bottom',v.bottom_timing||'',''],['Super-cycle',fP(v.super_cycle_target_usd)||'','']]}
+  ];
+  $('scCards').innerHTML=cards.map(c=>{
+    const v=s[c.k]||{};const prob=v.probability_pct||0;
+    return `<div class="sc ${c.cls}"><div class="sc-hd"><h3>${c.icon} ${c.name}</h3><span class="bdg ${c.bdg}">${prob} %</span></div>
+    <div class="sc-bd">${c.rows(v).map(r=>`<div class="mr"><span class="ml">${r[0]}</span><span class="mv ${r[2]}">${r[1]}</span></div>`).join('')}</div></div>`}).join('');
+}
+
+/* ═══ SCENARIO DETAILS ═══ */
+function renderScenarioDetails(){
+  const s=current.scenarios||{};
+  const items=[
+    {k:'pessimiste',color:'--red',bg:'--rbg',icon:'🔴',name:'Pessimiste'},
+    {k:'neutre',color:'--yel',bg:'--ybg',icon:'🟡',name:'Neutre (Base Case)'},
+    {k:'optimiste',color:'--grn',bg:'--gbg',icon:'🟢',name:'Optimiste'}
+  ];
+  $('scDetail').innerHTML=items.map(it=>{
+    const v=s[it.k]||{};
+    return `<div class="cd" style="border-left:3px solid var(${it.color})">
+      <h2>${it.icon} ${it.name}</h2>
+      <p style="color:var(--t2);margin-bottom:10px"><strong style="color:var(--t1)">Contexte :</strong> ${v.context||''}</p>
+      <p style="color:var(--t2);margin-bottom:10px"><strong style="color:var(--t1)">Narratif :</strong> ${v.narrative||''}</p>
+      ${v.aligned_analysts?`<p style="color:var(--t3);font-size:.82rem;margin-bottom:10px">Analystes alignés : ${v.aligned_analysts.join(', ')}</p>`:''}
+      ${v.key_conditions?`<p style="color:var(--t3);font-size:.82rem">Conditions : ${v.key_conditions.join(' · ')}</p>`:''}
+    </div>`}).join('');
+}
+
+/* ═══ COMPARE TABLE ═══ */
+function renderCompare(){
+  const s=current.scenarios||{};const p=s.pessimiste||{},n=s.neutre||{},o=s.optimiste||{};
+  $('compTbl').innerHTML=`<thead><tr><th>Métrique</th><th>🔴 Pess.</th><th>🟡 Neutre</th><th>🟢 Opti.</th></tr></thead><tbody>
+    <tr><td>Probabilité</td><td class="cp">${p.probability_pct||0} %</td><td class="cn">${n.probability_pct||0} %</td><td class="co">${o.probability_pct||0} %</td></tr>
+    <tr><td>Bottom</td><td class="cp">${fP(p.bottom_low_usd)}–${fP(p.bottom_high_usd)}</td><td class="cn">${fP(n.bottom_low_usd)}–${fP(n.bottom_high_usd)}</td><td class="co">${fP(o.bottom_low_usd)}–${fP(o.bottom_high_usd)}</td></tr>
+    <tr><td>Drawdown max</td><td class="cp">–${p.drawdown_max_pct||0}%</td><td class="cn">–${n.drawdown_max_pct||0}%</td><td class="co">–${o.drawdown_max_pct||0}%</td></tr>
+    <tr><td>Fin année</td><td class="cp">${fP(p.end_year_usd)}</td><td class="cn">${fP(n.end_year_usd)}</td><td class="co">${fP(o.end_year_usd)}</td></tr>
+    <tr><td>Timing bottom</td><td class="cp">${p.bottom_timing||''}</td><td class="cn">${n.bottom_timing||''}</td><td class="co">${o.bottom_timing||''}</td></tr>
+    <tr><td>Contexte</td><td class="cp">${p.context||''}</td><td class="cn">${n.context||''}</td><td class="co">${o.context||''}</td></tr>
+  </tbody>`;
+}
+
+/* ═══ CHANGELOG ═══ */
+function renderChangelog(){
+  const cl=current.changelog;
+  if(!cl||!cl.length){$('clContent').innerHTML='<div class="empty">Première analyse ou pas de changements détectés.</div>';return}
+  if(cl[0]&&cl[0].type==='info'){$('clContent').innerHTML=`<div class="empty">${cl[0].message}</div>`;return}
+
+  // Find previous analysis date
+  const currDate=index.find(e=>analyses[e.date]===current);
+  const currIdx=currDate?index.indexOf(currDate):0;
+  const prevEntry=index[currIdx+1];
+
+  $('clContent').innerHTML=(prevEntry?`<div style="margin-bottom:12px;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:7px;font-size:.83rem;color:var(--t2)">
+    Comparaison avec l'analyse du <strong style="color:var(--t1)">${dStr(prevEntry.date)}</strong></div>`:'')+
+    cl.map(c=>{
+      const dir=c.direction||'neutral';
+      const fromStr=typeof c.from==='number'?(c.from>1000?fP(c.from):c.from):c.from;
+      const toStr=typeof c.to==='number'?(c.to>1000?fP(c.to):c.to):c.to;
+      const diffStr=c.change_pct?(c.change_pct>0?'+':'')+c.change_pct+'%':c.change_pts?(c.change_pts>0?'+':'')+c.change_pts+' pts':'';
+      return `<div class="cli ${dir}"><div class="cm">${c.metric}</div>
+        <div class="cd2">${fromStr} <span class="arr ${dir}">${dir==='up'?'▲':'▼'} ${diffStr}</span> → <strong>${toStr}</strong></div></div>`;
+    }).join('');
+}
+
+/* ═══ EVOLUTION ═══ */
+function renderEvolution(){
+  if(charts.evo)charts.evo.destroy();if(charts.evoF)charts.evoF.destroy();if(charts.evoD)charts.evoD.destroy();
+  const entries=index.slice().reverse();
+  if(entries.length<2)return;
+  const labels=entries.map(e=>dStr(e.date));
+  const prices=entries.map(e=>e.price_usd||0);
+  const fngs=entries.map(e=>e.fear_greed||0);
+  const draws=entries.map(e=>e.drawdown_pct||0);
+
+  charts.evo=new Chart($('cEvo'),{type:'line',data:{labels,datasets:[
+    {label:'Prix BTC',data:prices,borderColor:ORG,backgroundColor:'rgba(249,115,22,.1)',fill:true,tension:.3,borderWidth:2.5,pointRadius:4,pointBackgroundColor:ORG}
+  ]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>fP(c.parsed.y)}}},scales:{y:{ticks:{callback:v=>fmt(v)}},x:{grid:{display:false}}}}});
+
+  charts.evoF=new Chart($('cEvoF'),{type:'line',data:{labels,datasets:[
+    {label:'F&G',data:fngs,borderColor:YEL,backgroundColor:'rgba(245,158,11,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:3}
+  ]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{min:0,max:100},x:{grid:{display:false}}}}});
+
+  charts.evoD=new Chart($('cEvoD'),{type:'line',data:{labels,datasets:[
+    {label:'Drawdown',data:draws,borderColor:RED,backgroundColor:'rgba(239,68,68,.1)',fill:true,tension:.3,borderWidth:2,pointRadius:3}
+  ]},options:{responsive:true,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.y.toFixed(1)+'%'}}},scales:{y:{reverse:true,ticks:{callback:v=>v+'%'}},x:{grid:{display:false}}}}});
+}
+
+/* ═══ HISTORY ═══ */
+function renderHistory(){
+  $('histList').innerHTML=index.map((e,i)=>{
+    const prev=index[i+1];
+    const ch=prev&&prev.price_usd?((e.price_usd-prev.price_usd)/prev.price_usd*100).toFixed(1):null;
+    const isAct=current===analyses[e.date];
+    return `<div class="hr ${isAct?'act':''}" onclick="switchVersion('${e.date}');$('vSel').value='${e.date}'">
+      <span class="hd">${dStr(e.date)}</span><span class="hp">${fP(e.price_usd)}</span>
+      <span class="hc" style="color:${ch>0?'var(--grn)':ch<0?'var(--red)':'var(--t3)'}">${ch!==null?(ch>0?'+':'')+ch+'%':'1ère'}</span>
+      <span style="color:var(--t3);font-size:.8rem">F&G: ${e.fear_greed||'--'}</span>
+      <span style="color:var(--t3);font-size:.8rem">DD: ${e.drawdown_pct||'--'}%</span>
+    </div>`}).join('');
+}
+
+/* ═══ INSTITUTIONAL ═══ */
+function renderInstitutional(){
+  const views=current.institutional_views||[];
+  $('instGrid').innerHTML=views.length?views.map(v=>`
+    <div class="inst-card" style="border-left-color:${v.stance==='bullish'?'var(--grn)':v.stance==='bearish'?'var(--red)':'var(--yel)'}">
+      <div class="firm">${v.firm} <span class="bdg ${v.stance==='bullish'?'g':v.stance==='bearish'?'r':'y'}">${v.stance}</span></div>
+      <div class="tgt">${v.target} · ${v.timeframe}</div>
+      <div class="arg">${v.key_argument}</div>
+    </div>`).join(''):'<div class="empty">Données non disponibles dans cette analyse.</div>';
+
+  const macro=current.macro_context||{};
+  $('macroCtx').innerHTML=`<div style="color:var(--t2);font-size:.88rem;line-height:1.7">
+    <strong style="color:var(--t1)">Taux Fed :</strong> ${macro.fed_rate||'--'}<br>
+    <strong style="color:var(--t1)">Outlook Fed :</strong> ${macro.fed_outlook||'--'}<br>
+    <strong style="color:var(--t1)">Liquidité globale :</strong> ${macro.global_liquidity_trend||'--'}<br>
+    <strong style="color:var(--t1)">S&P 500 :</strong> ${macro.sp500_trend||'--'}<br>
+    <strong style="color:var(--t1)">DXY :</strong> ${macro.dxy_trend||'--'}<br>
+    ${(macro.key_macro_events||[]).map(e=>'• '+e).join('<br>')}
+  </div>`;
+
+  const oc=current.onchain_signals||{};
+  $('onchainCtx').innerHTML=`<div style="color:var(--t2);font-size:.88rem;line-height:1.7">
+    <strong style="color:var(--t1)">Flux ETF (sem.) :</strong> ${oc.etf_flows_weekly||'--'}<br>
+    <strong style="color:var(--t1)">Accumulation whales :</strong> ${oc.whale_accumulation||'--'}<br>
+    <strong style="color:var(--t1)">Comportement mineurs :</strong> ${oc.miner_behavior||'--'}<br>
+    <strong style="color:var(--t1)">Réserves exchanges :</strong> ${oc.exchange_reserves_trend||'--'}<br>
+    ${(oc.key_onchain_insights||[]).map(e=>'• '+e).join('<br>')}
+  </div>`;
+}
+
+/* ═══ RISKS ═══ */
+function renderRisks(){
+  const c=current.consensus||{};
+  $('consensusRange').innerHTML=`<span style="color:var(--yel)">${c.institutional_consensus_range||'--'}</span>`;
+  $('consensusSub').innerHTML=`Fair value médian : <strong style="color:var(--org)">${fP(c.fair_value_median_usd)}</strong><br>${c.market_sentiment||''}<br><em>${c.key_debate||''}</em>`;
+
+  const r=current.risks||{};
+  $('risksGrid').innerHTML=`
+    <div><h3 style="color:var(--red);font-size:.88rem;margin-bottom:8px">▼ Downside</h3>
+      <ul class="rl down">${(r.downside||[]).map(d=>`<li><strong>${d.risk}</strong>${d.description} <em style="color:var(--t3)">(${d.probability})</em></li>`).join('')}</ul></div>
+    <div><h3 style="color:var(--grn);font-size:.88rem;margin-bottom:8px">▲ Upside</h3>
+      <ul class="rl up">${(r.upside||[]).map(u=>`<li><strong>${u.risk}</strong>${u.description} <em style="color:var(--t3)">(${u.probability})</em></li>`).join('')}</ul></div>`;
+
+  $('footerSources').textContent=(current.data_sources||[]).join(' · ');
+}
+
+/* ═══ CHARTS ═══ */
+function renderCharts(){
+  ['traj','range','draw','prob','horiz'].forEach(k=>{if(charts[k])charts[k].destroy()});
+  const s=current.scenarios||{};const p=s.pessimiste||{},n=s.neutre||{},o=s.optimiste||{};
+  const tp=current.trajectory_projections;
+
+  // Trajectory
+  if(tp&&tp.labels){
+    charts.traj=new Chart($('cTraj'),{type:'line',data:{labels:tp.labels,datasets:[
+      {label:'Pessimiste',data:tp.pessimiste,borderColor:RED,fill:false,tension:.35,borderWidth:2.5,pointRadius:3},
+      {label:'Neutre',data:tp.neutre,borderColor:YEL,fill:false,tension:.35,borderWidth:2.5,pointRadius:3},
+      {label:'Optimiste',data:tp.optimiste,borderColor:GRN,fill:false,tension:.35,borderWidth:2.5,pointRadius:3}
+    ]},options:{responsive:true,interaction:{mode:'index',intersect:false},plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:14}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+fP(c.parsed.y)}}},scales:{y:{ticks:{callback:v=>fmt(v)}},x:{grid:{display:false}}}}});
+  }
+
+  // Ranges
+  charts.range=new Chart($('cRange'),{type:'bar',data:{labels:['Bottom 2026','Fin 2026','Top prochain cycle'],datasets:[
+    {label:'Pessimiste',data:[[p.bottom_low_usd||0,p.bottom_high_usd||0],[p.end_year_usd*0.9||0,p.end_year_usd||0],[p.next_cycle_top_usd*0.85||0,p.next_cycle_top_usd||0]],backgroundColor:'rgba(239,68,68,.6)',borderColor:RED,borderWidth:1,borderRadius:4},
+    {label:'Neutre',data:[[n.bottom_low_usd||0,n.bottom_high_usd||0],[n.end_year_usd*0.9||0,n.end_year_usd*1.1||0],[n.next_cycle_top_low_usd||0,n.next_cycle_top_high_usd||0]],backgroundColor:'rgba(245,158,11,.6)',borderColor:YEL,borderWidth:1,borderRadius:4},
+    {label:'Optimiste',data:[[o.bottom_low_usd||0,o.bottom_high_usd||0],[o.end_year_usd*0.9||0,o.end_year_usd*1.1||0],[o.top_low_usd||0,o.top_high_usd||0]],backgroundColor:'rgba(16,185,129,.6)',borderColor:GRN,borderWidth:1,borderRadius:4}
+  ]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:14}},tooltip:{callbacks:{label:c=>{const r=c.raw;return c.dataset.label+': '+fP(r[0])+' – '+fP(r[1])}}}},scales:{y:{ticks:{callback:v=>fmt(v)}},x:{grid:{display:false}}}}});
+
+  // Drawdowns
+  charts.draw=new Chart($('cDraw'),{type:'bar',data:{labels:['Cycle 1\n2013','Cycle 2\n2017','Cycle 3\n2021','C4 Pess.','C4 Neutre','C4 Opti.'],
+    datasets:[{data:[-86,-84,-77,-(p.drawdown_max_pct||0),-(n.drawdown_max_pct||0),-(o.drawdown_max_pct||0)],
+      backgroundColor:['rgba(148,163,184,.4)','rgba(148,163,184,.4)','rgba(148,163,184,.4)','rgba(239,68,68,.6)','rgba(245,158,11,.6)','rgba(16,185,129,.6)'],
+      borderColor:[TK,TK,TK,RED,YEL,GRN],borderWidth:1,borderRadius:5}]},
+    options:{responsive:true,indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x+'%'}}},scales:{x:{min:-100,max:0,ticks:{callback:v=>v+'%'}},y:{grid:{display:false}}}}});
+
+  // Proba
+  charts.prob=new Chart($('cProb'),{type:'doughnut',data:{labels:['Pessimiste','Neutre','Optimiste','Autre'],
+    datasets:[{data:[p.probability_pct||0,n.probability_pct||0,o.probability_pct||0,100-(p.probability_pct||0)-(n.probability_pct||0)-(o.probability_pct||0)],
+      backgroundColor:[RED,YEL,GRN,'rgba(100,116,139,.3)'],borderColor:'rgba(0,0,0,.3)',borderWidth:2}]},
+    options:{responsive:true,cutout:'65%',plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:12}}}}});
+
+  // Horizon
+  charts.horiz=new Chart($('cHoriz'),{type:'bar',data:{labels:['2026','2027–28','2029–30'],datasets:[
+    {label:'Pessimiste',data:[[p.bottom_low_usd||0,p.end_year_usd||0],[p.end_year_usd||0,p.next_cycle_top_usd||0],[p.next_cycle_top_usd*0.5||0,p.next_cycle_top_usd*1.2||0]],backgroundColor:'rgba(239,68,68,.5)',borderColor:RED,borderWidth:1,borderRadius:4},
+    {label:'Neutre',data:[[n.bottom_low_usd||0,n.end_year_usd*1.2||0],[n.end_year_usd||0,n.next_cycle_top_high_usd||0],[n.next_cycle_top_low_usd||0,n.next_cycle_top_high_usd*1.5||0]],backgroundColor:'rgba(245,158,11,.5)',borderColor:YEL,borderWidth:1,borderRadius:4},
+    {label:'Optimiste',data:[[o.bottom_low_usd||0,o.top_high_usd||0],[o.top_low_usd||0,o.super_cycle_target_usd||0],[o.top_high_usd||0,(o.super_cycle_target_usd||0)*1.5]],backgroundColor:'rgba(16,185,129,.5)',borderColor:GRN,borderWidth:1,borderRadius:4}
+  ]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{usePointStyle:true,padding:14}},tooltip:{callbacks:{label:c=>{const r=c.raw;return c.dataset.label+': '+fP(r[0])+' – '+fP(r[1])}}}},scales:{y:{type:'logarithmic',ticks:{callback:v=>fmt(v)}},x:{grid:{display:false}}}}});
+}
+
+/* ═══ TABS ═══ */
+document.querySelectorAll('.tb').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  document.querySelectorAll('.pn').forEach(p=>p.classList.remove('on'));
+  t.classList.add('on');$('p-'+t.dataset.t).classList.add('on');
+}));
+
+/* ═══ INIT ═══ */
+fetchLive();setInterval(fetchLive,60000);
+loadData();
+</script>
+</body>
+</html>
