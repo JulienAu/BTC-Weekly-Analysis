@@ -1,5 +1,14 @@
 [
   {
+    "date": "2026-02-15",
+    "filename": "2026-02-15.json",
+    "generated_at": "2026-02-15T11:30:00Z",
+    "price_usd": 69765,
+    "fear_greed": 9,
+    "drawdown_pct": -44.8,
+    "summary": "Bitcoin consolide autour de 70K$ après avoir touché 60K$ début février dans un contexte d'extrême peur (indice à 9). Les whales accumulent massivement (387K BTC sur 30 jours) mais les ETF subissent des outflows. La Fed maintient les taux, Powell part en mai. Le consensus institutionnel vise 110-175K$ fin 2026, conditionné par l'adoption du CLARITY Act et la politique du nouveau Fed Chair. Les scenarios varient de 55K$ (bear) à 175K$ (bull) selon les conditions macro et réglementaires."
+  },
+  {
     "date": "2026-02-13",
     "filename": "2026-02-13.json",
     "generated_at": "2026-02-13T14:30:00Z",
