@@ -1,0 +1,317 @@
+{
+  "generated_at": "2026-02-22T11:30:00Z",
+  "data_sources": [
+    "CoinDesk",
+    "CoinMarketCap",
+    "Alternative.me",
+    "CoinStats",
+    "JPMorgan",
+    "Standard Chartered",
+    "Bernstein",
+    "Goldman Sachs",
+    "CryptoQuant",
+    "Glassnode",
+    "Federal Reserve",
+    "Fortune",
+    "Bloomberg"
+  ],
+  "market_snapshot": {
+    "price_usd": 68038,
+    "change_24h_pct": 0.55,
+    "market_cap_usd": 1360279265462,
+    "volume_24h_usd": 9361479621,
+    "fear_greed_index": 14,
+    "fear_greed_label": "Extreme Fear",
+    "dominance_pct": 60,
+    "ath": 126080,
+    "ath_date": "2025-10-06",
+    "drawdown_from_ath_pct": -46.1,
+    "months_since_halving": 22
+  },
+  "macro_context": {
+    "fed_rate": "3.50-3.75%",
+    "fed_outlook": "Fed maintient le statu quo avec division sur les futures coupes, inflation restant au-dessus de 2%, vigilance sur les tarifs douaniers",
+    "global_liquidity_trend": "neutral",
+    "sp500_trend": "consolidation près des sommets",
+    "dxy_trend": "stable",
+    "key_macro_events": [
+      "Fed pause en janvier 2026",
+      "Tarifs Trump rehaussés à 15%",
+      "Débat sur nomination Fed Chair",
+      "Tensions géopolitiques"
+    ]
+  },
+  "onchain_signals": {
+    "etf_flows_weekly": "-$1.2B",
+    "whale_accumulation": "Accumulation massive de 70k BTC compensant les ventes, mais flux d'échange contradictoires",
+    "miner_behavior": "Difficulté +15% après tempêtes hivernales, hashrate récupéré à 1 ZH/s, hashprice à $23.9/PH/s",
+    "exchange_reserves_trend": "stable malgré flux entrants élevés",
+    "key_onchain_insights": [
+      "Balances ETF sous pression avec $6.18B de sorties sur 2 mois",
+      "Whales accumulent mais paradoxe avec staging pour ventes",
+      "Liquidité spot au plus bas depuis novembre 2023"
+    ]
+  },
+  "regulatory_update": {
+    "us_regulation": "CLARITY Act bloqué au Sénat sur disputes stablecoin yield et éthique Trump crypto, médiation Maison Blanche en cours",
+    "global_regulation": "Californie DFAL entre en vigueur juillet 2026, UE et Asie renforcent cadres",
+    "key_regulatory_events": [
+      "Impasse CLARITY Act",
+      "Nomination SEC Chair Atkins",
+      "GENIUS Act implémentation 2026",
+      "Débats éthiques Trump crypto ventures"
+    ]
+  },
+  "institutional_views": [
+    {
+      "firm": "JPMorgan",
+      "target": "$170k-$266k",
+      "timeframe": "2026-long term",
+      "stance": "bullish",
+      "key_argument": "Volatilité BTC vs or favorable, modèle valorisation gold-parity, flux institutionnels attendus"
+    },
+    {
+      "firm": "Standard Chartered",
+      "target": "$100k (révisé de $150k)",
+      "timeframe": "fin 2026",
+      "stance": "neutral",
+      "key_argument": "Demande DAT affaiblie, flux ETF ralentis, risques macro élevés"
+    },
+    {
+      "firm": "Bernstein",
+      "target": "$150k",
+      "timeframe": "2026",
+      "stance": "bullish",
+      "key_argument": "Cycle bull allongé, sorties ETF <5% montrent résilience institutionnelle"
+    },
+    {
+      "firm": "Goldman Sachs",
+      "target": "$200k",
+      "timeframe": "conditions favorables",
+      "stance": "bullish",
+      "key_argument": "Cadre réglementaire structuré nécessaire, soutien taux Fed et assouplissement réglementaire"
+    }
+  ],
+  "scenarios": {
+    "pessimiste": {
+      "probability_pct": 30,
+      "top_usd": 75000,
+      "bottom_low_usd": 35000,
+      "bottom_high_usd": 50000,
+      "end_year_usd": 45000,
+      "drawdown_max_pct": -72,
+      "bottom_timing": "Q2-Q3 2026",
+      "next_cycle_top_usd": 180000,
+      "context": "Échec CLARITY Act, resserrement Fed, récession macro",
+      "narrative": "Les sorties ETF s'accélèrent, les institutions fuient le risque crypto, la réglementation hostile se durcit. Les mineurs capitulent massivement, créant une spirale baissière. Seuls les hodlers long terme résistent dans un marché bear prolongé.",
+      "aligned_analysts": [
+        "Standard Chartered bear case",
+        "Peter Brandt",
+        "CryptoQuant bear scenario"
+      ],
+      "key_conditions": [
+        "Échec législatif crypto",
+        "Hausse taux Fed",
+        "Récession économique",
+        "Renforcement réglementaire hostile"
+      ]
+    },
+    "neutre": {
+      "probability_pct": 50,
+      "top_current_cycle_usd": 95000,
+      "bottom_low_usd": 55000,
+      "bottom_high_usd": 70000,
+      "end_year_usd": 80000,
+      "drawdown_max_pct": -45,
+      "bottom_timing": "Q1-Q2 2026",
+      "next_cycle_top_low_usd": 200000,
+      "next_cycle_top_high_usd": 350000,
+      "next_cycle_top_timing": "2028-2029",
+      "context": "Consolidation prolongée, adoption graduelle institutionnelle, cadre réglementaire mixte",
+      "narrative": "Bitcoin entre dans une phase de maturation avec moins de volatilité mais croissance plus stable. Les ETF se stabilisent après purge, les entreprises adoptent progressivement. Cycle traditionnel 4 ans s'allonge.",
+      "aligned_analysts": [
+        "Standard Chartered",
+        "Fidelity",
+        "Morgan Stanley"
+      ],
+      "key_conditions": [
+        "CLARITY Act adopté avec compromis",
+        "Fed neutre",
+        "Adoption entreprises graduelle",
+        "Stabilisation ETF"
+      ]
+    },
+    "optimiste": {
+      "probability_pct": 20,
+      "top_low_usd": 150000,
+      "top_high_usd": 200000,
+      "bottom_low_usd": 75000,
+      "bottom_high_usd": 90000,
+      "end_year_usd": 140000,
+      "drawdown_max_pct": -30,
+      "bottom_timing": "Q1 2026",
+      "super_cycle_target_usd": 500000,
+      "context": "Adoption massive institutionnelle, réserve stratégique US, super-cycle",
+      "narrative": "Passage CLARITY Act déclenche ruée institutionnelle. Réserve stratégique US validée, autres pays suivent. Bitcoin devient réellement 'digital gold' avec allocation 5-10% portfolios institutionnels standard.",
+      "aligned_analysts": [
+        "JPMorgan bull case",
+        "Bernstein",
+        "Arthur Hayes",
+        "Tom Lee"
+      ],
+      "key_conditions": [
+        "CLARITY Act adopté rapidement",
+        "Réserve stratégique US",
+        "Assouplissement monétaire Fed",
+        "Adoption massive institutionnelle"
+      ]
+    }
+  },
+  "consensus": {
+    "market_sentiment": "Extreme Fear prolongée (23 jours), mais institutions résilientes malgré sorties ETF",
+    "institutional_consensus_range": "$100k-$170k",
+    "fair_value_median_usd": 135000,
+    "key_debate": "Timing adoption institutionnelle vs risques macro et impasse réglementaire CLARITY Act"
+  },
+  "risks": {
+    "downside": [
+      {
+        "risk": "Échec CLARITY Act",
+        "description": "Impasse Sénat sur éthique Trump et stablecoin yields bloque cadre réglementaire",
+        "probability": "medium"
+      },
+      {
+        "risk": "Récession macro",
+        "description": "Fed hawkish, tarifs Trump, tensions géopolitiques déclenchent récession",
+        "probability": "medium"
+      },
+      {
+        "risk": "Spirale mineurs",
+        "description": "Hashprice bas force capitulation massive, affaiblissement sécurité réseau",
+        "probability": "low"
+      },
+      {
+        "risk": "Liquidation ETF",
+        "description": "Sorties institutionnelles s'accélèrent, feedback loop baissier",
+        "probability": "medium"
+      }
+    ],
+    "upside": [
+      {
+        "risk": "Adoption réserves souveraines",
+        "description": "Autres pays suivent modèle US, demande structurelle massive",
+        "probability": "medium"
+      },
+      {
+        "risk": "Révolution monétaire",
+        "description": "Bitcoin devient vraiment réserve de valeur globale face débasement fiat",
+        "probability": "low"
+      },
+      {
+        "risk": "Breakthrough technologique",
+        "description": "Layer 2, Lightning adoption massive transforme utilité",
+        "probability": "low"
+      },
+      {
+        "risk": "Shortage physique",
+        "description": "ETF + institutions + souverains créent pénurie vraie sur 21M supply",
+        "probability": "medium"
+      }
+    ]
+  },
+  "trajectory_projections": {
+    "labels": [
+      "ATH Oct25",
+      "Actuel",
+      "Mars 26",
+      "Été 26",
+      "Fin 26",
+      "Mi 27",
+      "Fin 27",
+      "Mi 28",
+      "Fin 28",
+      "2030"
+    ],
+    "pessimiste": [
+      126080,
+      68038,
+      55000,
+      40000,
+      45000,
+      60000,
+      80000,
+      120000,
+      150000,
+      180000
+    ],
+    "neutre": [
+      126080,
+      68038,
+      65000,
+      75000,
+      80000,
+      110000,
+      140000,
+      180000,
+      250000,
+      350000
+    ],
+    "optimiste": [
+      126080,
+      68038,
+      85000,
+      120000,
+      140000,
+      180000,
+      220000,
+      300000,
+      400000,
+      500000
+    ]
+  },
+  "weekly_summary": "Bitcoin consolide autour de $68k dans un contexte d'Extreme Fear persistante depuis 23 jours. Les sorties ETF massives (-$6.18B sur 2 mois) contrastent avec l'accumulation whale de 70k BTC. La difficulté mining a bondi de 15% après récupération post-tempêtes hivernales. L'impasse CLARITY Act au Sénat sur les enjeux d'éthique Trump et stablecoin yields maintient l'incertitude réglementaire. Le consensus institutionnel converge vers $100k-$170k pour 2026, mais le timing dépend crucialement des catalyseurs macro et réglementaires.",
+  "changelog": [
+    {
+      "metric": "Prix BTC",
+      "from": 69765,
+      "to": 68038,
+      "change_pct": -2.5,
+      "direction": "down"
+    },
+    {
+      "metric": "Drawdown depuis ATH",
+      "from": -44.8,
+      "to": -46.1,
+      "change_pts": -1.3,
+      "direction": "down"
+    },
+    {
+      "metric": "Fear & Greed",
+      "from": 9,
+      "to": 14,
+      "change_pts": 5,
+      "direction": "up"
+    },
+    {
+      "metric": "Bottom pessimiste (bas)",
+      "from": 25000,
+      "to": 35000,
+      "change_pct": 40.0,
+      "direction": "up"
+    },
+    {
+      "metric": "Bottom neutre (bas)",
+      "from": 50000,
+      "to": 55000,
+      "change_pct": 10.0,
+      "direction": "up"
+    },
+    {
+      "metric": "Bottom optimiste (bas)",
+      "from": 80000,
+      "to": 75000,
+      "change_pct": -6.2,
+      "direction": "down"
+    }
+  ]
+}

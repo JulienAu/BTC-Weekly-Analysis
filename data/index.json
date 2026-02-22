@@ -1,5 +1,14 @@
 [
   {
+    "date": "2026-02-22",
+    "filename": "2026-02-22.json",
+    "generated_at": "2026-02-22T11:30:00Z",
+    "price_usd": 68038,
+    "fear_greed": 14,
+    "drawdown_pct": -46.1,
+    "summary": "Bitcoin consolide autour de $68k dans un contexte d'Extreme Fear persistante depuis 23 jours. Les sorties ETF massives (-$6.18B sur 2 mois) contrastent avec l'accumulation whale de 70k BTC. La difficulté mining a bondi de 15% après récupération post-tempêtes hivernales. L'impasse CLARITY Act au Sénat sur les enjeux d'éthique Trump et stablecoin yields maintient l'incertitude réglementaire. Le consensus institutionnel converge vers $100k-$170k pour 2026, mais le timing dépend crucialement des catalyseurs macro et réglementaires."
+  },
+  {
     "date": "2026-02-15",
     "filename": "2026-02-15.json",
     "generated_at": "2026-02-15T11:30:00Z",
