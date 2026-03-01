@@ -1,0 +1,349 @@
+{
+  "generated_at": "2026-03-01T18:00:00Z",
+  "data_sources": [
+    "Crypto.com",
+    "CoinStats",
+    "Alternative.me",
+    "Binance",
+    "Farside Investors",
+    "CoinGlass",
+    "Federal Reserve",
+    "CoinDesk",
+    "JP Morgan",
+    "Standard Chartered",
+    "Goldman Sachs",
+    "Bernstein",
+    "SpotedCrypto",
+    "BanklessTimes",
+    "CoinCodex",
+    "NFT Plazas",
+    "Yahoo Finance",
+    "BingX"
+  ],
+  "market_snapshot": {
+    "price_usd": 67000,
+    "change_24h_pct": 2.6,
+    "market_cap_usd": 2370000000000,
+    "volume_24h_usd": 142890000000,
+    "fear_greed_index": 14,
+    "fear_greed_label": "Extreme Fear",
+    "dominance_pct": 56.1,
+    "ath": 126296,
+    "ath_date": "October 2025",
+    "drawdown_from_ath_pct": 46.9,
+    "months_since_halving": 22
+  },
+  "macro_context": {
+    "fed_rate": "3.50-3.75%",
+    "fed_outlook": "Fed maintains restrictive rates, mixed committee views on future cuts. March pause expected, Warsh nomination as new Fed chair creates policy uncertainty. Some officials favor 0.75% cuts by year-end",
+    "global_liquidity_trend": "contracting",
+    "sp500_trend": "New highs while crypto underperforms",
+    "dxy_trend": "Strong dollar weighing on risk assets",
+    "key_macro_events": [
+      "Trump tariff announcements",
+      "Iran airstrikes",
+      "Fed chair transition in May 2026",
+      "Government shutdown data disruptions"
+    ]
+  },
+  "onchain_signals": {
+    "etf_flows_weekly": "-3.8B$ Feb outflows worst since launch",
+    "whale_accumulation": "MicroStrategy (717,722 BTC at $66,384 avg) underwater but holding. Corporate treasuries reducing purchases",
+    "miner_behavior": "Production costs around $77,000, current prices forcing miner capitulation",
+    "exchange_reserves_trend": "stable",
+    "key_onchain_insights": [
+      "20 millionth Bitcoin to be mined March 2026",
+      "ETF AUM halved from $170B peak to $84B",
+      "Total crypto liquidations $327M in 24h",
+      "Institutional selling pressure dominant"
+    ]
+  },
+  "regulatory_update": {
+    "us_regulation": "CLARITY Act advancing through Congress, SEC Chair Paul Atkins implementing innovation-friendly policies, GENIUS Act stablecoin rules finalizing by July 2026",
+    "global_regulation": "EU MiCA fully enforced, Japan proposing flat 20% crypto tax, South Korea Virtual Asset Protection Act active, 103+ nations now have crypto frameworks",
+    "key_regulatory_events": [
+      "SEC innovation exemption rollout",
+      "California Digital Assets Law July 2026",
+      "CFTC crypto sprint completion August 2026",
+      "Binance probe by Senate Democrats"
+    ]
+  },
+  "institutional_views": [
+    {
+      "firm": "Standard Chartered",
+      "target": "$50,000-100,000",
+      "timeframe": "2026",
+      "stance": "bearish",
+      "key_argument": "Cut year-end target from $150K to $50K citing slowing corporate treasury demand and macro risks"
+    },
+    {
+      "firm": "JPMorgan",
+      "target": "$170,000",
+      "timeframe": "2026",
+      "stance": "bullish",
+      "key_argument": "Bitcoin as digital gold with volatility-adjusted fair value model, $77K production cost floor"
+    },
+    {
+      "firm": "Goldman Sachs",
+      "target": "$200,000",
+      "timeframe": "scenario-based",
+      "stance": "neutral",
+      "key_argument": "Conditional on Fed cuts and regulatory easing, not firm target"
+    },
+    {
+      "firm": "Bernstein",
+      "target": "$150,000",
+      "timeframe": "2026",
+      "stance": "bullish",
+      "key_argument": "Calls current selloff 'weakest bear case in history', institutional buying offsetting retail weakness"
+    },
+    {
+      "firm": "Citigroup",
+      "target": "$143,000 base / $189,000 bull",
+      "timeframe": "2026",
+      "stance": "neutral",
+      "key_argument": "ETF adoption and CLARITY Act regulatory clarity driving bull case"
+    }
+  ],
+  "scenarios": {
+    "pessimiste": {
+      "probability_pct": 30,
+      "top_usd": 68000,
+      "bottom_low_usd": 45000,
+      "bottom_high_usd": 55000,
+      "end_year_usd": 75000,
+      "drawdown_max_pct": 65,
+      "bottom_timing": "Été 2026",
+      "next_cycle_top_usd": 200000,
+      "context": "Scénario baissier cyclique traditionnel avec correction profonde",
+      "narrative": "Le cycle de 4 ans suit son cours naturel. L'euphorie de 2025 cède place à une correction sévère alors que les flux ETF s'inversent massivement. Les entreprises comme MicroStrategy sous l'eau forcent des ventes. Les mineurs capitulent massivement sous les $50K. La Fed maintient des taux restrictifs aggravant la liquidité. Le sentiment reste en peur extrême pendant des mois.",
+      "aligned_analysts": [
+        "Steven McClurg (Canary Capital)",
+        "Standard Chartered",
+        "Peter Brandt"
+      ],
+      "key_conditions": [
+        "Flux ETF négatifs persistants",
+        "Capitulation des mineurs",
+        "Fed hawkish",
+        "Dollar fort",
+        "Récession macro"
+      ]
+    },
+    "neutre": {
+      "probability_pct": 45,
+      "top_current_cycle_usd": 85000,
+      "bottom_low_usd": 55000,
+      "bottom_high_usd": 65000,
+      "end_year_usd": 120000,
+      "drawdown_max_pct": 45,
+      "bottom_timing": "Q2 2026",
+      "next_cycle_top_low_usd": 200000,
+      "next_cycle_top_high_usd": 300000,
+      "next_cycle_top_timing": "2027-2028",
+      "context": "Consolidation institutionnelle avec reprise graduelle H2",
+      "narrative": "Période de maturation institutionnelle. Les flux ETF se stabilisent après purge initiale. Adoption corporate plus mesurée mais soutenue. Régulation favorable (CLARITY Act) stimule confiance institutionnelle. Fed assouplit modestement fin 2026. Transition vers marché moins volatil, plus prévisible.",
+      "aligned_analysts": [
+        "Carol Alexander",
+        "JPMorgan",
+        "Citigroup base case"
+      ],
+      "key_conditions": [
+        "Stabilisation flux ETF",
+        "CLARITY Act adopté",
+        "Fed dovish Q4",
+        "Adoption institutionnelle graduelle"
+      ]
+    },
+    "optimiste": {
+      "probability_pct": 25,
+      "top_low_usd": 180000,
+      "top_high_usd": 250000,
+      "bottom_low_usd": 65000,
+      "bottom_high_usd": 75000,
+      "end_year_usd": 200000,
+      "drawdown_max_pct": 25,
+      "bottom_timing": "Mars-Avril 2026",
+      "super_cycle_target_usd": 500000,
+      "context": "Supercycle alimenté par révolution institutionnelle et réserves souveraines",
+      "narrative": "Rupture du cycle traditionnel par adoption institutionnelle massive. Réserve Bitcoin stratégique US catalyse adoption souveraine mondiale. Flux ETF reprennent massivement après correction. Corporate treasuries accelerent après clarification réglementaire. 20 millionième Bitcoin miné crée FOMO de rareté. Fed pivot dovish soutient actifs risqués.",
+      "aligned_analysts": [
+        "Arthur Hayes",
+        "Tom Lee",
+        "Cathie Wood",
+        "Charles Hoskinson"
+      ],
+      "key_conditions": [
+        "Réserve Bitcoin US confirmée",
+        "Flux ETF record",
+        "Fed pivot agressif",
+        "Adoption corporate accélérée",
+        "FOMO rareté Bitcoin"
+      ]
+    }
+  },
+  "consensus": {
+    "market_sentiment": "Peur extrême dominante mais signaux contrarians émergent. Capitulation institutionnelle en cours avec purge nécessaire avant reprise",
+    "institutional_consensus_range": "$120K-175K",
+    "fair_value_median_usd": 150000,
+    "key_debate": "Rupture du cycle 4 ans par institutionnalisation vs correction cyclique traditionnelle avant nouveau bull run"
+  },
+  "risks": {
+    "downside": [
+      {
+        "risk": "Capitulation mineurs",
+        "description": "Prix sous coût production $77K force sorties massives, baisse hashrate",
+        "probability": "high"
+      },
+      {
+        "risk": "Flux ETF négatifs persistants",
+        "description": "Redemptions institutionnelles continues, AUM ETF divisé par 2",
+        "probability": "high"
+      },
+      {
+        "risk": "Fed restrictive prolongée",
+        "description": "Maintien taux élevés jusqu'en 2027, liquidité serrée",
+        "probability": "medium"
+      },
+      {
+        "risk": "Guerre commerciale",
+        "description": "Tarifs Trump perturbent croissance mondiale, flight to safety",
+        "probability": "medium"
+      },
+      {
+        "risk": "Crack technique majeur",
+        "description": "Cassure support $60K ouvre $45-50K",
+        "probability": "medium"
+      }
+    ],
+    "upside": [
+      {
+        "risk": "Réserve Bitcoin US",
+        "description": "Adoption officielle déclenche FOMO souverain mondial",
+        "probability": "medium"
+      },
+      {
+        "risk": "Fed pivot dovish",
+        "description": "Nouveau chair Warsh plus accommodant, cuts agressifs",
+        "probability": "medium"
+      },
+      {
+        "risk": "CLARITY Act",
+        "description": "Passage loi structure marché booste confiance institutionnelle",
+        "probability": "high"
+      },
+      {
+        "risk": "20 millionième Bitcoin",
+        "description": "Milestone psychologique mars 2026 catalyse narrative rareté",
+        "probability": "high"
+      },
+      {
+        "risk": "Flux ETF record",
+        "description": "Retour institutionnel massif après purge, nouveau ATH",
+        "probability": "low"
+      }
+    ]
+  },
+  "trajectory_projections": {
+    "labels": [
+      "ATH Oct25",
+      "Actuel",
+      "Bottom Q2",
+      "Été 2026",
+      "Q4 2026",
+      "Q1 2027",
+      "Q2 2027",
+      "Q3 2027",
+      "Q4 2027",
+      "2028+"
+    ],
+    "pessimiste": [
+      126296,
+      67000,
+      50000,
+      45000,
+      55000,
+      75000,
+      90000,
+      120000,
+      150000,
+      200000
+    ],
+    "neutre": [
+      126296,
+      67000,
+      60000,
+      75000,
+      90000,
+      120000,
+      140000,
+      180000,
+      220000,
+      280000
+    ],
+    "optimiste": [
+      126296,
+      67000,
+      70000,
+      100000,
+      150000,
+      200000,
+      250000,
+      320000,
+      400000,
+      500000
+    ]
+  },
+  "weekly_summary": "Bitcoin navigue en territoire de peur extrême (index 14) après chute Iran et tarifs Trump, mais rebondit à $67K. Flux ETF catastrophiques -$3.8B février, AUM divisé par 2. Régulation progresse (CLARITY Act), Fed pause mars attendue. Consensus institutionnel $120-175K malgré corrections. Bataille narrative : cycle traditionnel vs supercycle institutionnel.",
+  "changelog": [
+    {
+      "metric": "Prix BTC",
+      "from": 68038,
+      "to": 67000,
+      "change_pct": -1.5,
+      "direction": "down"
+    },
+    {
+      "metric": "Drawdown depuis ATH",
+      "from": -46.1,
+      "to": 46.9,
+      "change_pts": 93.0,
+      "direction": "up"
+    },
+    {
+      "metric": "Fear & Greed",
+      "from": 14,
+      "to": 14,
+      "change_pts": 0,
+      "direction": "down"
+    },
+    {
+      "metric": "Probabilité neutre",
+      "from": 50,
+      "to": 45,
+      "change_pts": -5,
+      "direction": "down"
+    },
+    {
+      "metric": "Probabilité optimiste",
+      "from": 20,
+      "to": 25,
+      "change_pts": 5,
+      "direction": "up"
+    },
+    {
+      "metric": "Bottom pessimiste (bas)",
+      "from": 35000,
+      "to": 45000,
+      "change_pct": 28.6,
+      "direction": "up"
+    },
+    {
+      "metric": "Bottom optimiste (bas)",
+      "from": 75000,
+      "to": 65000,
+      "change_pct": -13.3,
+      "direction": "down"
+    }
+  ]
+}

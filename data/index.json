@@ -1,5 +1,14 @@
 [
   {
+    "date": "2026-03-01",
+    "filename": "2026-03-01.json",
+    "generated_at": "2026-03-01T18:00:00Z",
+    "price_usd": 67000,
+    "fear_greed": 14,
+    "drawdown_pct": 46.9,
+    "summary": "Bitcoin navigue en territoire de peur extrême (index 14) après chute Iran et tarifs Trump, mais rebondit à $67K. Flux ETF catastrophiques -$3.8B février, AUM divisé par 2. Régulation progresse (CLARITY Act), Fed pause mars attendue. Consensus institutionnel $120-175K malgré corrections. Bataille narrative : cycle traditionnel vs supercycle institutionnel."
+  },
+  {
     "date": "2026-02-22",
     "filename": "2026-02-22.json",
     "generated_at": "2026-02-22T11:30:00Z",
