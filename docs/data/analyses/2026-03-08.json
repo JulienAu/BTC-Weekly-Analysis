@@ -1,0 +1,356 @@
+{
+  "generated_at": "2026-03-08T10:00:00Z",
+  "data_sources": [
+    "CoinMarketCap",
+    "CoinGecko",
+    "Coinbase",
+    "Glassnode",
+    "CryptoQuant",
+    "Federal Reserve",
+    "TradingView",
+    "Bloomberg",
+    "JPMorgan",
+    "Standard Chartered",
+    "Bernstein",
+    "Goldman Sachs",
+    "Citi",
+    "CNBC",
+    "CoinPedia",
+    "Interactive Crypto",
+    "The Block",
+    "XS Research"
+  ],
+  "market_snapshot": {
+    "price_usd": 67500,
+    "change_24h_pct": -1.2,
+    "market_cap_usd": 1355000000000,
+    "volume_24h_usd": 26000000000,
+    "fear_greed_index": 13,
+    "fear_greed_label": "Extreme Fear",
+    "dominance_pct": 56.5,
+    "ath": 126080,
+    "ath_date": "2025-10-06",
+    "drawdown_from_ath_pct": -46.5,
+    "months_since_halving": 22
+  },
+  "macro_context": {
+    "fed_rate": "3.50-3.75%",
+    "fed_outlook": "Fed maintient taux inchangés après 3 baisses en 2025. Inflation à 2.7%, politique attentiste avec transition leadership mai 2026",
+    "global_liquidity_trend": "contracting",
+    "sp500_trend": "Consolidation defensive, volatilité macro élevée",
+    "dxy_trend": "Rebond technique vers 99 après guerre Iran/US, supporté par safe-haven",
+    "key_macro_events": [
+      "Guerre US-Iran depuis février",
+      "NFP -92k choc février",
+      "DXY rallye à 99.4 sur tensions géopolitiques",
+      "Fed pause janvier, Chair Powell terme expire mai"
+    ]
+  },
+  "onchain_signals": {
+    "etf_flows_weekly": "+1.1B$ depuis début guerre Iran",
+    "whale_accumulation": "Accumulation 429k BTC dans bande 60-70k$ depuis janvier. BlackRock +21.8k BTC depuis février",
+    "miner_behavior": "Coûts production ~77k$ créent floor selon JPMorgan",
+    "exchange_reserves_trend": "decreasing",
+    "key_onchain_insights": [
+      "43% supply en perte à 68k$",
+      "STH selling près 74k$ plafond",
+      "ETF flows tournent positif 14j",
+      "Réaccumulation institutionnelle timide mais visible"
+    ]
+  },
+  "regulatory_update": {
+    "us_regulation": "GENIUS Act stablecoins effectif juillet 2026. CLARITY Act attente Sénat. SEC Atkins approche pro-innovation vs Gensler",
+    "global_regulation": "MiCA EU pleinement appliqué, deadline juillet 2026. Japon taxe crypto 20% vs 55%. Asie compétition hub crypto",
+    "key_regulatory_events": [
+      "Indiana 8e état crypto pensions publiques",
+      "103+ nations cadres crypto",
+      "Strike BitLicense NY",
+      "Californie licensing juillet 2026"
+    ]
+  },
+  "institutional_views": [
+    {
+      "firm": "JPMorgan",
+      "target": "$170,000",
+      "timeframe": "2026",
+      "stance": "bullish",
+      "key_argument": "Modèle volatilité-ajusté or digital. Floor 77k$ coûts miners. Challenge 28.3T$ or market cap"
+    },
+    {
+      "firm": "Standard Chartered",
+      "target": "$150,000",
+      "timeframe": "fin 2026",
+      "stance": "bullish",
+      "key_argument": "Révisé de 300k$. DAT buying terminé mais ETF support structurel"
+    },
+    {
+      "firm": "Goldman Sachs",
+      "target": "$200,000",
+      "timeframe": "scénario 2026",
+      "stance": "bullish",
+      "key_argument": "Conditionnel à baisses Fed et assouplissement réglementaire"
+    },
+    {
+      "firm": "Bernstein",
+      "target": "$150,000",
+      "timeframe": "2026",
+      "stance": "bullish",
+      "key_argument": "Cycle étendu par flux institutionnels. Selloff actuel plus faible histoire"
+    },
+    {
+      "firm": "Citi",
+      "target": "$143,000",
+      "timeframe": "base case 2026",
+      "stance": "neutral",
+      "key_argument": "Bull case 189k$, bear case 78k$. Adoption ETF et clarté réglementaire"
+    }
+  ],
+  "scenarios": {
+    "pessimiste": {
+      "probability_pct": 25,
+      "top_usd": 74000,
+      "bottom_low_usd": 25000,
+      "bottom_high_usd": 40000,
+      "end_year_usd": 55000,
+      "drawdown_max_pct": -80,
+      "bottom_timing": "Q3-Q4 2026",
+      "next_cycle_top_usd": 120000,
+      "context": "Cycle traditionnel 4 ans respecté, correction structurelle profonde",
+      "narrative": "October 2025 était le vrai top cyclique. Guerre Iran prolongée, dollar super-cycle, liquidité globale sèche. Fed forcé hausser taux sur inflation. ETF outflows massifs, leverage liquidation, capitulation retail/institutional. Breakdown technique long-terme déclenche cascade ventes. Récession US pousse vers cash/Treasuries.",
+      "aligned_analysts": [
+        "Peter Brandt",
+        "Benjamin Cowen",
+        "Bloomberg Intelligence McGlone"
+      ],
+      "key_conditions": [
+        "Dollar soutenu >105 DXY",
+        "Fed hawkish pivot",
+        "Récession confirmée",
+        "ETF outflows >10B$ mensuel",
+        "Breakdown support 60k$"
+      ]
+    },
+    "neutre": {
+      "probability_pct": 50,
+      "top_current_cycle_usd": 95000,
+      "bottom_low_usd": 45000,
+      "bottom_high_usd": 65000,
+      "end_year_usd": 85000,
+      "drawdown_max_pct": -50,
+      "bottom_timing": "Q2 2026",
+      "next_cycle_top_low_usd": 200000,
+      "next_cycle_top_high_usd": 300000,
+      "next_cycle_top_timing": "2027-2028",
+      "context": "Consolidation étendue avec volatilité macro élevée, cycles partiellement cassés",
+      "narrative": "Marché mature avec flux institutionnels. Range 45-95k$ pendant 12-18 mois. Guerre Iran résolution graduelle, Fed coupe modérément. ETF flows stabilisent sans explosion. Transition retail vers TradFi prend temps. Support technique 60-65k$ tient finalement. Réaccumulation lente prépare prochain cycle.",
+      "aligned_analysts": [
+        "Carol Alexander Sussex",
+        "CoinShares",
+        "Grayscale"
+      ],
+      "key_conditions": [
+        "DXY retour 95-100",
+        "Fed 1-2 cuts 2026",
+        "ETF flows neutres",
+        "Support 60k$ validation",
+        "Résolution géopolitique"
+      ]
+    },
+    "optimiste": {
+      "probability_pct": 25,
+      "top_low_usd": 150000,
+      "top_high_usd": 250000,
+      "bottom_low_usd": 55000,
+      "bottom_high_usd": 75000,
+      "end_year_usd": 180000,
+      "drawdown_max_pct": -35,
+      "bottom_timing": "Q1 2026 fini",
+      "super_cycle_target_usd": 500000,
+      "context": "Super-cycle confirmé, adoption institutionnelle accélérée, cycles traditionnels brisés",
+      "narrative": "Institutional Era réellement commencé. ETF flows explosent sur résolution Iran + baisses Fed agressives. CLARITY Act passage accélère adoption corporate. Japex taxe 20% déclenche wave asiatique. Supply shock post-20M BTC milestone mars. Pension funds allocation massive Q2-Q3. Nouvelle ATH automne puis consolidation bull.",
+      "aligned_analysts": [
+        "Tom Lee Fundstrat",
+        "Arthur Hayes",
+        "Nexo Research"
+      ],
+      "key_conditions": [
+        "Fed cuts 3+ fois",
+        "ETF flows >15B$ trimestriel",
+        "CLARITY Act passage",
+        "Résolution Iran rapide",
+        "Breakout 80k$ confirmé"
+      ]
+    }
+  },
+  "consensus": {
+    "market_sentiment": "Extreme Fear mais signes réaccumulation institutionnelle. Macro uncertainty domine pricing court terme",
+    "institutional_consensus_range": "143k-170k$",
+    "fair_value_median_usd": 155000,
+    "key_debate": "Cycles traditionnels cassés par institutionnels vs correction structurelle inévitable post-top octobre"
+  },
+  "risks": {
+    "downside": [
+      {
+        "risk": "Guerre Iran prolongée",
+        "description": "Escalade militaire maintient dollar fort, étrangle liquidité crypto",
+        "probability": "high"
+      },
+      {
+        "risk": "Fed hawkish surprise",
+        "description": "Inflation persistante force durcissement monétaire inattendu",
+        "probability": "medium"
+      },
+      {
+        "risk": "ETF outflows cascade",
+        "description": "Reversal institutional flows déclenche spirale baisse",
+        "probability": "medium"
+      },
+      {
+        "risk": "Récession US confirmée",
+        "description": "NFP négatifs persistent, consommation s'effondre",
+        "probability": "medium"
+      },
+      {
+        "risk": "Leverage liquidation systémique",
+        "description": "Breakdown 60k$ force unwinding positions massif",
+        "probability": "low"
+      }
+    ],
+    "upside": [
+      {
+        "risk": "Résolution géopolitique",
+        "description": "Paix Iran permet reflation trade, dollar faiblit",
+        "probability": "medium"
+      },
+      {
+        "risk": "Fed pivot dovish",
+        "description": "Emploi faible force cuts agressifs, liquidity flood",
+        "probability": "medium"
+      },
+      {
+        "risk": "CLARITY Act passage",
+        "description": "Cadre réglementaire clair ouvre vannes institutionnelles",
+        "probability": "medium"
+      },
+      {
+        "risk": "Pension funds wave",
+        "description": "Allocation 1-5% $50T pension assets",
+        "probability": "low"
+      },
+      {
+        "risk": "Supply shock 20M BTC",
+        "description": "Milestone mars catalyse narrative scarcité",
+        "probability": "low"
+      }
+    ]
+  },
+  "trajectory_projections": {
+    "labels": [
+      "ATH Oct25",
+      "Actuel",
+      "Été 2026",
+      "Fin 2026",
+      "Mi-2027",
+      "Fin 2027",
+      "Mi-2028",
+      "Fin 2028",
+      "Mi-2029",
+      "Fin 2029"
+    ],
+    "pessimiste": [
+      126080,
+      67500,
+      35000,
+      55000,
+      45000,
+      65000,
+      85000,
+      120000,
+      95000,
+      110000
+    ],
+    "neutre": [
+      126080,
+      67500,
+      55000,
+      85000,
+      120000,
+      180000,
+      220000,
+      280000,
+      250000,
+      300000
+    ],
+    "optimiste": [
+      126080,
+      67500,
+      120000,
+      180000,
+      280000,
+      400000,
+      500000,
+      650000,
+      800000,
+      1000000
+    ]
+  },
+  "weekly_summary": "Bitcoin trade à 67.5k$ avec Fear Index à 13 (Extreme Fear) suite guerre Iran/US qui pousse DXY vers 99. ETF flows redeviennent positifs (+1.1B$ depuis guerre) malgré 43% supply en perte. Fed pause avec transition leadership mai, inflation 2.7% vs 2% cible. Consensus institutionnel 143-170k$ 2026 mais macro uncertainty élevée. Prochains catalyseurs: résolution géopolitique, Fed mars, milestone 20M BTC.",
+  "changelog": [
+    {
+      "metric": "Prix BTC",
+      "from": 67000,
+      "to": 67500,
+      "change_pct": 0.7,
+      "direction": "up"
+    },
+    {
+      "metric": "Drawdown depuis ATH",
+      "from": 46.9,
+      "to": -46.5,
+      "change_pts": -93.4,
+      "direction": "down"
+    },
+    {
+      "metric": "Fear & Greed",
+      "from": 14,
+      "to": 13,
+      "change_pts": -1,
+      "direction": "down"
+    },
+    {
+      "metric": "Probabilité pessimiste",
+      "from": 30,
+      "to": 25,
+      "change_pts": -5,
+      "direction": "down"
+    },
+    {
+      "metric": "Probabilité neutre",
+      "from": 45,
+      "to": 50,
+      "change_pts": 5,
+      "direction": "up"
+    },
+    {
+      "metric": "Bottom pessimiste (bas)",
+      "from": 45000,
+      "to": 25000,
+      "change_pct": -44.4,
+      "direction": "down"
+    },
+    {
+      "metric": "Bottom neutre (bas)",
+      "from": 55000,
+      "to": 45000,
+      "change_pct": -18.2,
+      "direction": "down"
+    },
+    {
+      "metric": "Bottom optimiste (bas)",
+      "from": 65000,
+      "to": 55000,
+      "change_pct": -15.4,
+      "direction": "down"
+    }
+  ]
+}

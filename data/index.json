@@ -1,5 +1,14 @@
 [
   {
+    "date": "2026-03-08",
+    "filename": "2026-03-08.json",
+    "generated_at": "2026-03-08T10:00:00Z",
+    "price_usd": 67500,
+    "fear_greed": 13,
+    "drawdown_pct": -46.5,
+    "summary": "Bitcoin trade à 67.5k$ avec Fear Index à 13 (Extreme Fear) suite guerre Iran/US qui pousse DXY vers 99. ETF flows redeviennent positifs (+1.1B$ depuis guerre) malgré 43% supply en perte. Fed pause avec transition leadership mai, inflation 2.7% vs 2% cible. Consensus institutionnel 143-170k$ 2026 mais macro uncertainty élevée. Prochains catalyseurs: résolution géopolitique, Fed mars, milestone 20M BTC."
+  },
+  {
     "date": "2026-03-01",
     "filename": "2026-03-01.json",
     "generated_at": "2026-03-01T18:00:00Z",
